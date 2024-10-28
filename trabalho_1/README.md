@@ -2,7 +2,7 @@
 
 Este projeto em C cria um programa que demonstra a criação e controle de processos usando as funções:
 
-> `fork()`, `execv()`, `execve()`, `getpid()`, `getppid()`, e `wait()`.
+> `fork()`, `execv()`, `execve()`, `getpid()`, `getppid()`, `wait()`, e `waitpid()`.
 
 ### Feito Por: [David Caldas](https://github.com/caldasdv), [Tales L. Oliveira](https://github.com/TalesLimaOliveira).
 
