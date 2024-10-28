@@ -13,15 +13,14 @@ int main(void)
     // printf("Hello, world!\n");
 
     //We can use the return of the fork to create a more control space..
-    //Creating only 3 procces exaple:
+    //Creating only 3 procces example:
 
     int id = fork();
 
     if (id != 0){
         printf("Parent PID: %d, Fork ID: %d\n", getpid(), id);
         fork();
-    }
-        
+    }    
 
     printf("Hello from PID: %d\n", getpid());
     return 0;
