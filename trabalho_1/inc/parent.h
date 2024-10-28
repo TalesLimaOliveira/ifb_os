@@ -13,7 +13,7 @@
  *          no processo pai  utilizando execve().
  *          O processo pai espera o término do processo filho.
  */
-void executar_comando_pai(void);
+void executar_pai(void);
 
 /**
  * @brief Aguardar o término do processo filho. O status de término

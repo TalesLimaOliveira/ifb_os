@@ -8,7 +8,7 @@
  *          no processo pai  utilizando execve().
  *          O processo pai espera o término do processo filho.
  */
-void executar_comando_pai(void){
+void executar_pai(void){
     printf("Processo PAI:\n");
     printf("  PID do pai: %d\n", getpid());
 

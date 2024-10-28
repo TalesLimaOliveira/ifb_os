@@ -19,7 +19,7 @@
  *      O processo pai executa seu código em parent.c,
  *      e o processo filho executa o código em child.c.
  */
-int main(int argc, char const *argv[]){
+int main(void){
     //Cria um novo processo
     pid_t pid = fork();
 
