@@ -9,16 +9,15 @@
  *          O processo pai espera o término do processo filho.
  */
 void executar_pai(void){
-    printf("Processo PAI:\n");
-    printf("  PID do pai: %d\n", getpid());
+    printf("PAI: PID do pai: %d\n", getpid());
 
     char *args[] = {"/bin/echo", "Olá do processo pai!", NULL};  // Comando echo
     char *envp[] = {NULL};  // Ambiente vazio para simplificação
 
     //Espera o término do processo filho
     aguardar_filho(); 
-    printf("  Pai aguardou filho terminar...\n");
-    printf("  Pai executando comando 'echo Olá do processo pai!' com execve...\n");
+    printf("PAI: Aguardou filho terminar...\n");
+    printf("PAI: Executando comando 'echo Olá do processo pai!' com execve...\n");
 
     //Substitui o processo pai pelo comando 'echo'
     execve(args[0], args, envp);  
@@ -38,10 +37,10 @@ void aguardar_filho(void) {
     wait(&status); 
 
     if (WIFEXITED(status)) {
-        printf("  Filho terminou com status: %d\n", WEXITSTATUS(status));
+        printf("PAI: Filho terminou com status: %d\n", WEXITSTATUS(status));
     } else {
-        printf("  Filho terminou de forma anormal.\n");
+        printf("PAI: Filho terminou de forma anormal.\n");
     }
 
-    printf("  Pai continua após o término do filho.\n");
+    printf("PAI: continua após o término do filho.\n");
 }
