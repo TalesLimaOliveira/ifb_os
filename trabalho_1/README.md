@@ -1,4 +1,4 @@
-# Programa de Processos com fork, execv e execve
+# Programa de Processos
 
 Este projeto em C cria um programa que demonstra a criação e controle de processos usando as funções:
 
