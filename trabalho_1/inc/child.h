@@ -11,7 +11,7 @@
 /**
  * @brief
  */
-void executa_filho(void);
+void executar_filho(void);
 
 /**
  * @brief Executa um comando "ls -l" no processo filho utilizando

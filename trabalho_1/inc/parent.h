@@ -11,7 +11,7 @@
 /**
  * @brief 
  */
-void executa_pai(void);
+void executar_pai(void);
 
 /**
  * @brief Função que executa: "echo 'Olá do processo pai!'"

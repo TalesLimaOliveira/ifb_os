@@ -12,7 +12,7 @@
 /**
  * @brief 
  */
-void executa_filho(void){
+void executar_filho(void){
     printf("  FILHO: PID do filho: %d\n", getpid());
     printf("  FILHO: PID do pai: %d\n", getppid());
 

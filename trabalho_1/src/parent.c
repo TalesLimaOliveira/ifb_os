@@ -6,7 +6,7 @@
 /**
  * @brief 
  */
-void executa_pai(void){
+void executar_pai(void){
     printf("  PAI: PID do pai: %d\n", getpid());
     printf("  AVO: PID do avo: %d\n", getppid());
 
