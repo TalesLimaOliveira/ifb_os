@@ -36,6 +36,7 @@ int main(void){
     else{
         executar_pai(); 
     }
-         
+
+    printf("  --> Tanto filho quanto pai executaram essa linha!\n");
     return 0;
 }
