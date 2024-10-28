@@ -24,7 +24,7 @@ int main(void){
     pid_t pid = fork();
 
     if (pid < 0){
-        perror("Erro ao criar o processo");
+        perror("  Erro ao criar o processo");
         return 1;
     }
 

@@ -9,21 +9,21 @@
  *          O processo pai espera o término do processo filho.
  */
 void executar_pai(void){
-    printf("PAI: PID do pai: %d\n", getpid());
+    printf("  PAI: PID do pai: %d\n", getpid());
 
     char *args[] = {"/bin/echo", "Olá do processo pai!", NULL};  // Comando echo
     char *envp[] = {NULL};  // Ambiente vazio para simplificação
 
     //Espera o término do processo filho
     aguardar_filho(); 
-    printf("PAI: Aguardou filho terminar...\n");
-    printf("PAI: Executando comando 'echo Olá do processo pai!' com execve...\n");
+    printf("  PAI: Aguardou filho terminar...\n");
+    printf("  PAI: Executando comando 'echo Olá do processo pai!' com execve...\n");
 
     //Substitui o processo pai pelo comando 'echo'
     execve(args[0], args, envp);  
 
     //Se execve falhar, imprime erro
-    perror("Erro ao executar execve no pai");
+    perror("  Erro ao executar execve no pai");
 }
 
 /**

@@ -14,15 +14,15 @@
  *          execv(), que lista os arquivos do diretório atual.
  */
 void executar_filho(void){
-    printf("FILHO: PID do filho: %d\n", getpid());
-    printf("FILHO: PID do pai: %d\n", getppid());
+    printf("  FILHO: PID do filho: %d\n", getpid());
+    printf("  FILHO: PID do pai: %d\n", getppid());
 
     // Comando para listar arquivos (ls -l)
     char *args[] = {"/bin/ls", "-l", NULL}; 
 
-    printf("FILHO: executando comando 'ls -l' com execv...\n");
+    printf("  FILHO: executando comando 'ls -l' com execv...\n");
     execv(args[0], args);  //Substitui o processo filho pelo comando 'ls -l'
 
     //Se execv falhar, imprime erro
-    perror("FILHO: Erro ao executar execv no filho");
+    perror("  FILHO: Erro ao executar execv no filho");
 }
