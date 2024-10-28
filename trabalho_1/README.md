@@ -1,19 +1,13 @@
 # Programa de Processos com fork, execv e execve
 
-Este projeto em C cria um programa que demonstra a criação e controle de processos usando as funções `fork()`, `execv()`, `execve()`, `getpid()`, `getppid()`, e `wait()`. O programa divide a execução em duas partes distintas: uma para o processo pai e outra para o processo filho. 
+Este projeto em C cria um programa que demonstra a criação e controle de processos usando as funções:
 
-O processo **pai** utiliza `execve()` para executar um comando, enquanto o **filho** utiliza `execv()` para executar um comando diferente.
+> `fork()`, `execv()`, `execve()`, `getpid()`, `getppid()`, e `wait()`.
 
-Feito Por:
-[David Caldas.](https://github.com/caldasdv)
-[Tales L. Oliveira.](https://github.com/TalesLimaOliveira)
+### Feito Por: [David Caldas](https://github.com/caldasdv), [Tales L. Oliveira](https://github.com/TalesLimaOliveira).
 
-## Requirements
-> GCC/G++ (MinGW.org GCC Build-2) - Versão 9.2.0
 
-> GNU Make - Versão 3.82.90
-
-### Comandos para Compilar e Executar
+### Compilar e Executar
 
 Este projeto usa um `Makefile` para simplificar a compilação e execução. 
 
@@ -22,34 +16,139 @@ Este projeto usa um `Makefile` para simplificar a compilação e execução.
   make all
 ```
 
-## Estrutura do Código
+- Para executar o programa, utilize:
+```bash
+  make run
+```
 
-O código foi modularizado em três partes principais:
-1. **main.c**: Função principal que inicializa o programa e cria o novo processo.
-2. **parent.c** e **parent.h**: Contêm a lógica do processo pai.
-3. **child.c** e **child.h**: Contêm a lógica do processo filho.
+<br>
 
-### Funcionalidades
+---
 
-1. **main.c**: 
-   - Realiza o `fork()` para criar um novo processo.
-   - Se o processo criado é o **pai**, ele chama a função `executar_comando_pai()` para executar o comando específico do pai.
-   - Se o processo criado é o **filho**, ele chama a função `executar_comando_filho()` para executar o comando específico do filho.
+<br>
 
-2. **parent.c / parent.h**:
-   - Função `executar_comando_pai()`:
-     - Imprime o PID do processo pai.
-     - Executa um comando `echo` usando `execve()` para exibir a mensagem "Olá do processo pai!".
-     - Utiliza um ambiente vazio (`char *envp[] = {NULL};`) para simplificação.
-     - Aguarda o término do processo filho caso `execve()` falhe.
-   - Função `aguardar_filho()`:
-     - O processo pai utiliza `wait()` para aguardar a finalização do processo filho.
-     - Imprime o status de saída do processo filho.
+## Manual
 
-3. **child.c / child.h**:
-   - Função `executar_comando_filho()`:
-     - Imprime o PID do processo filho e o PID do processo pai.
-     - Executa o comando `ls -l` usando `execv()` para listar os arquivos do diretório atual.
-     - Utiliza `execv()` sem ambiente adicional, assumindo que o processo herda o ambiente do pai.
+### 1. fork()
+
+A função `fork()` cria um novo processo duplicando o processo que a chamou. O processo original é chamado de processo pai, e o novo processo é chamado de processo filho.
+
+**Retorno:**
+
+No processo *pai*, `fork()` retorna o PID (Process ID) do *filho*.
+No processo *filho*, retorna 0.
+Se ocorrer um erro, retorna -1.
+
+**Exemplo:**
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main(void){
+    pid_t pid = fork();
+
+    if (pid < 0){
+        perror("Fork failed");
+        return 1;
+    }
+    
+    // Child process
+    if (pid == 0){
+        printf("This is the child process with PID: %d\n", getpid());
+    }
+
+    //Parent process
+    else{
+        printf("This is the parent process with PID: %d and child PID: %d\n", getpid(), pid);
+    }
+
+    return 0;
+}
+```
 
 
+### 2. wait() e waitpid()
+
+A função `wait()` faz com que o processo *pai* aguarde a finalização de um processo *filho*.
+A função `waitpid()` é uma versão mais flexível, permitindo especificar qual processo filho aguardar.
+
+**Retorno:**
+
+Retorna o PID do *filho* que terminou ou -1 em caso de erro.
+
+**Exemplo:**
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+int main(void){
+    pid_t pid = fork();
+
+    if (pid < 0){
+        perror("Fork failed");
+        return 1;
+    }
+    
+    // Child process
+    if (pid == 0) {
+        sleep(2); // Simulate work
+        return 0; // Child exits
+    }
+    
+    //Parent process
+    int status;
+    pid_t waited_pid = wait(&status);
+    printf("Child with PID %d terminated.\n", waited_pid);
+
+    if (WIFEXITED(status)) {
+        printf("Child exited with status %d.\n", WEXITSTATUS(status));
+    }
+    
+    return 0;
+}
+```
+
+### 3. getpid() e getppid()
+
+**Retorno:**
+
+`getpid()` retorna o PID do processo chamador.
+`getppid()` retorna o PID do processo pai.
+
+**Exemplo:**
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main(void){
+    printf("Current Process ID (PID): %d\n", getpid());
+    printf("Parent Process ID (PPID): %d\n", getppid());
+    return 0;
+}
+```
+
+### 4. execv() e execve()
+
+A função `execv()` substitui o processo atual por um novo processo. Recebe como argumentos o caminho do executável e um vetor de argumentos.
+A função `execve()` é semelhante, mas aceita um vetor de *variáveis de ambiente*.
+
+**Retorno:**
+
+Em caso de sucesso, não retorna. Em caso de erro, retorna -1.
+
+**Exemplo:**
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main(void){
+    char *args[] = {"ls", "-l", NULL}; // Command and arguments
+    execv("/bin/ls", args); // Execute ls command
+    perror("execv failed"); // If execv fails
+    return 1;
+}
+```
