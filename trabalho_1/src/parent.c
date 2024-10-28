@@ -9,8 +9,6 @@
 void executar_pai(void){
     printf("  EP -   PAI PID: %d\n", getpid());
     printf("  EP -   AVO PID: %d\n", getppid());
-
-    sleep(1);
 }
 
 

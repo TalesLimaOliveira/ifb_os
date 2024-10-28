@@ -15,8 +15,6 @@
 void executar_filho(void){
     printf("  EC - FILHO PID: %d\n", getpid());
     printf("  EC -   PAI PID: %d\n", getppid());
-
-    sleep(1);
 }
 
 /**
