@@ -4,11 +4,22 @@
 #include "parent.h"
 
 /**
- * @brief Função que executa: "echo 'Olá do processo pai!'"
+ * @brief 
+ */
+void executa_pai(void){
+    printf("  PAI: PID do pai: %d\n", getpid());
+    printf("  AVO: PID do avo: %d\n", getppid());
+
+    sleep(1);
+}
+
+
+/**
+ * @brief Função que Transforma: "echo 'Olá do processo pai!'"
  *          no processo pai  utilizando execve().
  *          O processo pai espera o término do processo filho.
  */
-void executar_pai(void){
+void transformar_pai(void){
     printf("  PAI: PID do pai: %d\n", getpid());
 
     char *args[] = {"/bin/echo", "Olá do processo pai!", NULL};  // Comando echo

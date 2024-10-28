@@ -10,10 +10,20 @@
 #include "child.h"
 
 /**
+ * @brief 
+ */
+void executa_filho(void){
+    printf("  FILHO: PID do filho: %d\n", getpid());
+    printf("  FILHO: PID do pai: %d\n", getppid());
+
+    sleep(1);
+}
+
+/**
  * @brief Executa um comando "ls -l" no processo filho utilizando
  *          execv(), que lista os arquivos do diretório atual.
  */
-void executar_filho(void){
+void transformar_filho(void){
     printf("  FILHO: PID do filho: %d\n", getpid());
     printf("  FILHO: PID do pai: %d\n", getppid());
 

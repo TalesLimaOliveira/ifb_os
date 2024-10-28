@@ -9,11 +9,16 @@
 #define PARENT_H
 
 /**
+ * @brief 
+ */
+void executa_pai(void);
+
+/**
  * @brief Função que executa: "echo 'Olá do processo pai!'"
  *          no processo pai  utilizando execve().
  *          O processo pai espera o término do processo filho.
  */
-void executar_pai(void);
+void transformar_pai(void);
 
 /**
  * @brief Aguardar o término do processo filho. O status de término

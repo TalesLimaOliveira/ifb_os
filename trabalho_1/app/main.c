@@ -36,7 +36,19 @@ int main(void){
     else{
         executar_pai(); 
     }
+    printf("  --> Pai e filho executaram essa linha!\n");
 
-    printf("  Nem o pai ou filho executarão essa linha, pois irão se torna outro programa graças ao EXECV!\n");
+    //Trasforma processo filho
+    if (pid == 0){ 
+        transformar_filho();
+    }
+    //Trasforma processo pai
+    else{
+        transformar_pai(); 
+    }
+    printf("  --> Nem o pai ou filho executarão essa linha\n");
+    printf("      Pois irão se torna outro programa com EXECV!\n");
+    printf("      Há não ser que ocorra um erro!\n");
+
     return 0;
 }
