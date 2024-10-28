@@ -37,6 +37,6 @@ int main(void){
         executar_pai(); 
     }
 
-    printf("  --> Tanto filho quanto pai executaram essa linha!\n");
+    printf("  Nem o pai ou filho executarão essa linha, pois irão se torna outro programa graças ao EXECV!\n");
     return 0;
 }
