@@ -1,0 +1,62 @@
+# Variables
+CC = gcc
+CFLAGS = -Wall -Wextra
+
+# File extensions
+EXTSRC = c
+EXTINC = h
+APP ?= main
+
+# Directories
+APPDIR = app
+SRCDIR = src
+INCDIR = inc
+LIBDIR = lib
+BLDDIR = build
+BINDIR = $(BLDDIR)\bin
+OBJDIR = $(BLDDIR)\obj
+
+# Application name verification
+ifeq ($(APP),)
+$(error No app specified. Use: make APP=<app_name>)
+endif
+
+# Find all source files (.$(EXTSRC))
+SOURCES := $(wildcard $(SRCDIR)/*.$(EXTSRC)) $(wildcard $(APPDIR)/$(APP).$(EXTSRC))
+
+# Generate a list of object files (.o) from the source file names
+OBJECTS := $(patsubst $(SRCDIR)/%.$(EXTSRC), $(OBJDIR)/%.o, $(filter $(SRCDIR)/%.$(EXTSRC), $(SOURCES))) \
+           $(patsubst $(APPDIR)/%.$(EXTSRC), $(OBJDIR)/%.o, $(filter $(APPDIR)/%.$(EXTSRC), $(SOURCES)))
+
+# Find all library files (.a) in the library directory
+LIBRARIES := $(wildcard $(LIBDIR)/*.a)
+
+# Executes make
+.PHONY: all
+all: clean folder exe
+
+#Create directory
+folder:
+	@ if [ ! -d "$(BLDDIR)" ]; then mkdir -p $(BLDDIR); fi
+	@ if [ ! -d "$(BINDIR)" ]; then mkdir -p $(BINDIR); fi
+	@ if [ ! -d "$(OBJDIR)" ]; then mkdir -p $(OBJDIR); fi
+
+# Compile exe
+exe:  $(OBJECTS)
+	$(CC) $(CFLAGS) $(OBJECTS) -I $(INCDIR) -o $(BINDIR)/$(APP)
+
+# Compile objects
+$(OBJDIR)/%.o: $(SRCDIR)/%.$(EXTSRC)
+	$(CC) $(CFLAGS) -c $< -I $(INCDIR) -o $@
+
+$(OBJDIR)/%.o: $(APPDIR)/%.$(EXTSRC)
+	$(CC) $(CFLAGS) -c $< -I $(INCDIR) -o $@
+
+# Run exe
+run:
+	$(BINDIR)/$(APP)
+
+# Clean BUILD files
+.PHONY: clean
+clean:
+	@ if [ -d "$(BLDDIR)" ]; then rm -rf $(BLDDIR); fi
