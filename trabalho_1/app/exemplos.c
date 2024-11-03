@@ -14,16 +14,16 @@
 #include "exec.h"
 
 int main(void){
-    printf("\nRunning ids_example:\n");
+    printf("\n========== Executando exemplos_ids  ==========\n");
     ids_example();
 
-    printf("\nRunning fork_example:\n");
+    printf("\n========== Executando exemplos_fork ==========\n");
     fork_example();
 
-    printf("\nRunning wait_example:\n");
+    printf("\n========== Executando exemplos_wait ==========\n");
     wait_example();
 
-    printf("\nRunning exec_example:\n");
+    printf("\n========== Executando exemplos_exec ==========\n");
     exec_example();
 
     return 0;
