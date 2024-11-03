@@ -1,25 +1,28 @@
-# Variables
-CC = gcc
-CFLAGS = -Wall -Wextra
+# List of applications to compile
+RUNAPP ?= main
+APPS ?= main app1 app2
+ARGS ?= 
 
-# File extensions
+# Vars
+CC = gcc
 EXTSRC = c
 EXTINC = h
 
+# Flags
+CFLAGS = -O0 -std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow
+LDFLAGS = -lcrypt -lm
+
 # Directories
 APPDIR = app
-SRCDIR = src
-INCDIR = inc
+INCDIR = include
 LIBDIR = lib
-BLDDIR = build
-BINDIR = $(BLDDIR)/bin
-OBJDIR = $(BLDDIR)/obj
+SRCDIR = src
+BUILDDIR = build
+BINDIR = $(BUILDDIR)/bin
+OBJDIR = $(BUILDDIR)/obj
 
-# Main application to run
-MAINAPP ?= main
-
-# Find all source files in APPDIR with the extension $(EXTSRC)
-APPS := $(basename $(notdir $(wildcard $(APPDIR)/*.$(EXTSRC))))
+# Find all source files in SRCDIR and APPDIR for each app
+SOURCES := $(wildcard $(SRCDIR)/*.$(EXTSRC))
 
 # Find all library files (.a) in the library directory
 LIBRARIES := $(wildcard $(LIBDIR)/*.a)
@@ -28,18 +31,33 @@ LIBRARIES := $(wildcard $(LIBDIR)/*.a)
 .PHONY: all
 all: clean folder $(APPS)
 
+
 # Create directory
+.PHONY: folder
 folder:
-	@ mkdir -p $(BLDDIR) $(BINDIR) $(OBJDIR)
-# Compile each app as a separate executable
-$(APPS): %: $(APPDIR)/%.$(EXTSRC) $(filter $(SRCDIR)/*.$(EXTSRC), $(wildcard $(SRCDIR)/*.$(EXTSRC)))
-	$(CC) $(CFLAGS) -I $(INCDIR) $^ $(LIBRARIES) -o $(BINDIR)/$@
+	@ mkdir -p $(BUILDDIR) $(BINDIR) $(OBJDIR)
 
-# Run only the main application
-run: $(MAINAPP)
-	$(BINDIR)/$(MAINAPP)
+# Compile each application
+$(APPS): %: $(OBJDIR)/%.o $(OBJECTS)
+	@ $(CC) $(CFLAGS) $(OBJDIR)/$*.o $(OBJECTS) -I $(INCDIR) -L $(LIBDIR) $(LIBRARIES) $(LDFLAGS) -o $(BINDIR)/$*
 
-# Clean BUILD files
+# Compile individual object files for each application in APPDIR
+$(OBJDIR)/%.o: $(APPDIR)/%.$(EXTSRC)
+	@ $(CC) $(CFLAGS) -c $< -I $(INCDIR) -o $@
+
+# Compile common source files in SRCDIR
+OBJECTS := $(patsubst $(SRCDIR)/%.$(EXTSRC), $(OBJDIR)/%.o, $(SOURCES))
+$(OBJDIR)/%.o: $(SRCDIR)/%.$(EXTSRC)
+	@ $(CC) $(CFLAGS) -c $< -I $(INCDIR) -o $@
+
+
+# Run main application with arguments
+.PHONY: run
+run: $(BINDIR)/$(RUNAPP)
+	@ $(BINDIR)/$(RUNAPP) $(ARGS)
+
+
+# Clean build files
 .PHONY: clean
 clean:
-	@ if [ -d "$(BLDDIR)" ]; then rm -rf $(BLDDIR); fi
+	@ rm -rf $(BUILDDIR)

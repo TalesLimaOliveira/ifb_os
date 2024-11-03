@@ -4,6 +4,8 @@ Este projeto em C cria um programa que demonstra a criação e controle de proce
 
 > `fork()`, `execv()`, `execve()`, `getpid()`, `getppid()`, `wait()`, e `waitpid()`.
 
+Um manual explicando as funçoes pode ser visto juntamente com o projeto.
+
 ### Feito Por: [David Caldas](https://github.com/caldasdv), [Tales L. Oliveira](https://github.com/TalesLimaOliveira).
 
 
@@ -29,7 +31,27 @@ Este projeto usa um `Makefile` para simplificar a compilação e execução.
 
 ## Manual
 
-### 1. fork()
+### 1. getpid() e getppid()
+
+**Retorno:**
+
+`getpid()` retorna o PID do processo chamador.
+`getppid()` retorna o PID do processo pai.
+
+**Exemplo:**
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main(void){
+    printf("Current Process ID (PID): %d\n", getpid());
+    printf("Parent Process ID (PPID): %d\n", getppid());
+    return 0;
+}
+```
+
+### 2. fork()
 
 A função `fork()` cria um novo processo duplicando o processo que a chamou. O processo original é chamado de processo pai, e o novo processo é chamado de processo filho.
 
@@ -43,6 +65,7 @@ Se ocorrer um erro, retorna -1.
 ```c
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/types.h>
 
 int main(void){
     pid_t pid = fork();
@@ -52,7 +75,7 @@ int main(void){
         return 1;
     }
     
-    // Child process
+    //Child process
     if (pid == 0){
         printf("This is the child process with PID: %d\n", getpid());
     }
@@ -67,7 +90,7 @@ int main(void){
 ```
 
 
-### 2. wait() e waitpid()
+### 3. wait() e waitpid()
 
 A função `wait()` faz com que o processo *pai* aguarde a finalização de um processo *filho*.
 A função `waitpid()` é uma versão mais flexível, permitindo especificar qual processo filho aguardar.
@@ -92,7 +115,7 @@ int main(void){
         return 1;
     }
     
-    // Child process
+    //Child process
     if (pid == 0) {
         sleep(2); // Simulate work
         return 0; // Child exits
@@ -102,31 +125,7 @@ int main(void){
     int status;
     pid_t waited_pid = wait(&status);
     printf("Child with PID %d terminated.\n", waited_pid);
-
-    if (WIFEXITED(status)) {
-        printf("Child exited with status %d.\n", WEXITSTATUS(status));
-    }
     
-    return 0;
-}
-```
-
-### 3. getpid() e getppid()
-
-**Retorno:**
-
-`getpid()` retorna o PID do processo chamador.
-`getppid()` retorna o PID do processo pai.
-
-**Exemplo:**
-
-```c
-#include <stdio.h>
-#include <unistd.h>
-
-int main(void){
-    printf("Current Process ID (PID): %d\n", getpid());
-    printf("Parent Process ID (PPID): %d\n", getppid());
     return 0;
 }
 ```
