@@ -1,30 +1,28 @@
 /**
  * @file main.c
+ * 
  * @author David Caldas (github.com/caldasdv)
  * @author Tales L. Oliveira (github.com/TalesLimaOliveira)
- *
- * @brief Exemplos de como utilizar as funções:
- *          fork, getpid, getppid, wait, waitpid, execv e execve;
  */
 
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include "parent.h"
-#include "child.h"
+#include "pai.h"
+#include "filho.h"
 
 
 /**
  * @brief Ao Inicia o programa cria um novo processo.
- *      O processo pai executa seu código em parent.c,
- *      e o processo filho executa o código em child.c.
+ *      O processo pai executa seu código em pai.c,
+ *      e o processo filho executa o código em filho.c.
  */
 int main(void){
     //Cria um novo processo
     pid_t pid = fork();
 
     if (pid < 0){
-        perror("  Erro ao criar o processo");
+        printf("  Erro ao criar o processo");
         return 1;
     }
 

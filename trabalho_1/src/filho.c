@@ -1,17 +1,14 @@
 /**
- * @file child.c
+ * @file filho.c
  * 
  * @author David Caldas (github.com/caldasdv)
  * @author Tales L. Oliveira (github.com/TalesLimaOliveira)
  */
 
-#include <stdio.h>
-#include <unistd.h>
-#include "child.h"
 
-/**
- * @brief 
- */
+#include "filho.h"
+
+
 void executar_filho(void){
     printf("  EC - FILHO PID: %d\n", getpid());
     printf("  EC -   PAI PID: %d\n", getppid());

@@ -1,12 +1,16 @@
 /**
- * @file child.h
+ * @file filho.h
+ * @brief Header file for filho.c
  * 
  * @author David Caldas (github.com/caldasdv)
  * @author Tales L. Oliveira (github.com/TalesLimaOliveira)
  */
 
-#ifndef CHILD_H
-#define CHILD_H
+#ifndef FILHO_H
+#define FILHO_H
+
+#include <stdio.h>
+#include <unistd.h>
 
 /**
  * @brief
@@ -19,4 +23,4 @@ void executar_filho(void);
  */
 void transformar_filho(void);
 
-#endif
+#endif//FILHO_H

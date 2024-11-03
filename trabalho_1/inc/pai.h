@@ -1,12 +1,17 @@
 /**
- * @file parent.h
+ * @file pai.h
+ * @brief Header file for pai.c
  * 
  * @author David Caldas (github.com/caldasdv)
  * @author Tales L. Oliveira (github.com/TalesLimaOliveira)
  */
 
-#ifndef PARENT_H
-#define PARENT_H
+#ifndef PAI_H
+#define PAI_H
+
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
 
 /**
  * @brief 
@@ -26,4 +31,4 @@ void transformar_pai(void);
  */
 void aguardar_filho(void);
 
-#endif
+#endif//PAI_H

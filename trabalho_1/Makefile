@@ -1,7 +1,7 @@
-# List of applications to compile
-RUNAPP ?= main
-APPS ?= main app1 app2
-ARGS ?= 
+# Apps names
+MAINAPP ?= main
+EXAMPLEAPP ?= exemplos
+APPS ?= $(MAINAPP) $(EXAMPLEAPP)
 
 # Vars
 CC = gcc
@@ -53,8 +53,12 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.$(EXTSRC)
 
 # Run main application with arguments
 .PHONY: run
-run: $(BINDIR)/$(RUNAPP)
-	@ $(BINDIR)/$(RUNAPP) $(ARGS)
+run: $(BINDIR)/$(MAINAPP)
+	@ $(BINDIR)/$(MAINAPP)
+
+.PHONY: examples
+examples: $(BINDIR)/$(MAINAPP)
+	@ $(BINDIR)/$(MAINAPP)
 
 
 # Clean build files

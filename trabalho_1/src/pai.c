@@ -1,11 +1,14 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include "parent.h"
-
 /**
- * @brief 
+ * @file pai.c
+ * 
+ * @author David Caldas (github.com/caldasdv)
+ * @author Tales L. Oliveira (github.com/TalesLimaOliveira)
  */
+
+
+#include "pai.h"
+
+
 void executar_pai(void){
     printf("  EP -   PAI PID: %d\n", getpid());
     printf("  EP -   AVO PID: %d\n", getppid());
