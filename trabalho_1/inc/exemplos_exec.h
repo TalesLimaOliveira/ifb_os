@@ -14,6 +14,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-void exec_example(void);
+int exec_example(void);
 
 #endif//EXEMPLOS_EXEC_H

@@ -11,7 +11,7 @@ CFLAGS = -O0 -Wall
 
 # Directories
 APPDIR = app
-INCDIR = include
+INCDIR = inc
 LIBDIR = lib
 SRCDIR = src
 BUILDDIR = build
