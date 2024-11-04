@@ -50,7 +50,7 @@ $(APPS): %: folder $(OBJECTS) $(OBJDIR)/%.o
 
 # Run targets with arguments
 run-%: %
-    ./$(BINDIR)/$* $(ARGS)
+	./$(BINDIR)/$* $(ARGS)
 
 # Clean build files
 clean:
