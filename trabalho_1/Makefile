@@ -1,7 +1,5 @@
-# Apps names
-MAINAPP ?= main
-EXAMPLEAPP ?= exemplos
-APPS ?= main exemplos
+# App name (default to 'main' if not specified)
+APP ?= main
 
 # Vars
 CC = gcc
@@ -10,7 +8,6 @@ EXTINC = h
 
 # Flags
 CFLAGS = -O0 -Wall
-# LDFLAGS = -lcrypt
 
 # Directories
 APPDIR = app
@@ -21,45 +18,40 @@ BUILDDIR = build
 BINDIR = $(BUILDDIR)/bin
 OBJDIR = $(BUILDDIR)/obj
 
-# Find all source files in SRCDIR and APPDIR for each app
+# Find all source files in SRCDIR
 SOURCES := $(wildcard $(SRCDIR)/*.$(EXTSRC))
 
 # Find all library files (.a) in the library directory
 LIBRARIES := $(wildcard $(LIBDIR)/*.a)
 
+# Object files
+OBJECTS := $(patsubst $(SRCDIR)/%.$(EXTSRC), $(OBJDIR)/%.o, $(SOURCES))
+
 # Executes make
 .PHONY: all
-all: clean folder $(APPS)
-
+all: clean folder $(APP)
 
 # Create directory
 .PHONY: folder
 folder:
 	@ mkdir -p $(BUILDDIR) $(BINDIR) $(OBJDIR)
 
-# Compile each application
-$(APPS): %: $(OBJDIR)/%.o $(OBJECTS)
-	@ $(CC) $(CFLAGS) $(OBJDIR)/$*.o $(OBJECTS) -I $(INCDIR) -L $(LIBDIR) $(LIBRARIES) $(LDFLAGS) -o $(BINDIR)/$*
+# Compile the specified application
+$(APP): $(OBJDIR)/$(APP).o $(OBJECTS)
+	@ $(CC) $(CFLAGS) $(OBJDIR)/$(APP).o $(OBJECTS) -I $(INCDIR) -L $(LIBDIR) $(LIBRARIES) $(LDFLAGS) -o $(BINDIR)/$(APP)
 
-# Compile individual object files for each application in APPDIR
-$(OBJDIR)/%.o: $(APPDIR)/%.$(EXTSRC)
+# Compile individual object file for the application in APPDIR
+$(OBJDIR)/$(APP).o: $(APPDIR)/$(APP).$(EXTSRC)
 	@ $(CC) $(CFLAGS) -c $< -I $(INCDIR) -o $@
 
 # Compile common source files in SRCDIR
-OBJECTS := $(patsubst $(SRCDIR)/%.$(EXTSRC), $(OBJDIR)/%.o, $(SOURCES))
 $(OBJDIR)/%.o: $(SRCDIR)/%.$(EXTSRC)
 	@ $(CC) $(CFLAGS) -c $< -I $(INCDIR) -o $@
 
-
-# Run main application with arguments
+# Run the application with arguments
 .PHONY: run
-run: $(BINDIR)/$(MAINAPP)
-	@ $(BINDIR)/$(MAINAPP)
-
-.PHONY: examples
-examples: $(BINDIR)/$(MAINAPP)
-	@ $(BINDIR)/$(MAINAPP)
-
+run: $(BINDIR)/$(APP)
+	@ $(BINDIR)/$(APP)
 
 # Clean build files
 .PHONY: clean
