@@ -14,6 +14,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-void wait_example(void);
+int wait_example(void);
 
 #endif//EXEMPLOS_WAIT_H
