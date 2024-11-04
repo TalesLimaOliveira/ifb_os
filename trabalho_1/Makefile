@@ -9,8 +9,8 @@ EXTSRC = c
 EXTINC = h
 
 # Flags
-CFLAGS = -O0 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow
-LDFLAGS = -lcrypt -lm
+CFLAGS = -O0 -Wall
+# LDFLAGS = -lcrypt
 
 # Directories
 APPDIR = app
