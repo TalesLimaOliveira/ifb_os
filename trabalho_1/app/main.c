@@ -22,7 +22,7 @@ int main(void){
     pid_t pid = fork();
 
     if (pid < 0){
-        printf("  Erro ao criar o processo");
+        printf("  Erro ao criar o processo filho");
         return 1;
     }
 
@@ -34,6 +34,7 @@ int main(void){
     else{
         executar_pai(); 
     }
+    
     printf("-> Pai e filho executaram essa linha!\n");
 
     //Trasforma processo filho
@@ -45,8 +46,8 @@ int main(void){
         transformar_pai(); 
     }
     printf("-> Nem o pai ou filho executarão essa linha\n");
-    printf("   Pois irão se torna outro programa com EXECV!\n");
-    printf("   Há não ser que ocorra um erro!\n");
+    printf("   Pois irao se torna outro programa com EXECV!\n");
+    printf("   A nao ser que ocorra um erro!\n");
 
     return 0;
 }

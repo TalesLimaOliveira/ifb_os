@@ -13,14 +13,15 @@ int wait_example(void){
     pid_t pid = fork();
 
     if (pid < 0){
-        perror("Fork falhou");
+        printf("Fork falhou");
         return 1;
     }
     
     //Processo Filho
     if (pid == 0) {
-        sleep(1); // Simula Trabalho
-        exit(0); // Fim do Filho
+        printf("Filho Trabalhando...\n");
+        sleep(2); // Simula Trabalho
+        exit(0); // Termina o filho para nao haver duplicatas
     }
     
     //Processo Pai

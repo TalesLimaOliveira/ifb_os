@@ -10,8 +10,7 @@
 
 
 void executar_filho(void){
-    printf("  EC - FILHO PID: %d\n", getpid());
-    printf("  EC -   PAI PID: %d\n", getppid());
+    printf("  PROCESSO FILHO com PID: %d e Pai com PID: %d\n", getpid(), getppid());
 }
 
 /**
@@ -19,16 +18,12 @@ void executar_filho(void){
  *          execv(), que lista os arquivos do diretório atual.
  */
 void transformar_filho(void){
-    printf("  TC - FILHO PID: %d\n", getpid());
-    printf("  TC -   PAI PID: %d\n", getppid());
-
-    // Comando para listar arquivos (ls -l)
+    //Vetor para listar arquivos (ls -l)
     char *args[] = {"/bin/ls", "-l", NULL}; 
 
-    printf("  TC - FILHO: executando comando 'ls -l' com execv...\n\n");
-    //Substitui o processo filho pelo comando 'ls -l'
-    execv(args[0], args);  
+    printf("  PROCESSO FILHO transforma em 'ls -l' com execv...\n\n");
+    execv(args[0], args);  //Substitui o processo filho pelo comando 'ls -l'
 
     //Se execv falhar, imprime erro
-    perror("  TC - FILHO: Erro ao executar execv no filho");
+    perror("  PROCESSO FILHO: Erro ao executar execv no filho");
 }

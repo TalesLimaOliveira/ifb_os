@@ -10,8 +10,7 @@
 
 
 void executar_pai(void){
-    printf("  EP -   PAI PID: %d\n", getpid());
-    printf("  EP -   AVO PID: %d\n", getppid());
+    printf("  PROCESSO PAI com PID: %d e \"Avo\" com PID: %d\n", getpid(), getppid());
 }
 
 
@@ -21,21 +20,19 @@ void executar_pai(void){
  *          O processo pai espera o término do processo filho.
  */
 void transformar_pai(void){
-    printf("  TP -   PAI PID: %d\n", getpid());
-
-    char *args[] = {"/bin/echo", "Olá do processo pai!", NULL};  // Comando echo
-    char *envp[] = {NULL};  // Ambiente vazio para simplificação
+    //Vetor para listar arquivos (ls -l)
+    char *args[] = {"/bin/echo", "--> Ola do processo pai!", NULL};
+    char *envp[] = {NULL};  //Ambiente vazio
 
     //Espera o término do processo filho
     aguardar_filho(); 
-    printf("  TP - Aguardou filho terminar...\n");
-    printf("  TP - Executando comando 'echo' com execve...\n\n");
+    printf("  PROCESSO PAI Executando comando 'echo' com execve...\n\n");
 
     //Substitui o processo pai pelo comando 'echo'
     execve(args[0], args, envp);  
 
     //Se execve falhar, imprime erro
-    perror("  TP - Erro ao executar execve no pai");
+    perror("  PROCESSO PAI: Erro ao executar execve no pai");
 }
 
 /**
@@ -46,11 +43,6 @@ void aguardar_filho(void) {
     int status;
 
     //Pai espera o término do filho
-    wait(&status); 
-
-    if (WIFEXITED(status)) {
-        printf("  WP - Filho terminou com status: %d\n", WEXITSTATUS(status));
-    } else {
-        printf("  WP - Filho terminou de forma anormal.\n");
-    }
+    pid_t waited_pid = wait(&status);
+    printf("  PROCESSO PAI aguardou filho com PID %d terminar.\n", waited_pid);
 }
