@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "pai.h": "c",
+        "filho.h": "c"
+    }
+}

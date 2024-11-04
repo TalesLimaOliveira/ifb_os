@@ -7,7 +7,7 @@
  * @author Tales L. Oliveira (github.com/TalesLimaOliveira)
  */
 
-#include "exemplos_fork.h"
+#include <exemplos_fork.h>
 
 int fork_example(void){
     pid_t pid = fork();

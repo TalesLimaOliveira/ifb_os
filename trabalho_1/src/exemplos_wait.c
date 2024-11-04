@@ -7,7 +7,7 @@
  * @author Tales L. Oliveira (github.com/TalesLimaOliveira)
  */
 
-#include "exemplos_wait.h"
+#include <exemplos_wait.h>
 
 int wait_example(void){
     pid_t pid = fork();

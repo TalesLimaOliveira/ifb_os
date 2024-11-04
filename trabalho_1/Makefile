@@ -1,7 +1,7 @@
 # Apps names
 MAINAPP ?= main
 EXAMPLEAPP ?= exemplos
-APPS ?= $(MAINAPP) $(EXAMPLEAPP)
+APPS ?= main exemplos
 
 # Vars
 CC = gcc
@@ -9,7 +9,7 @@ EXTSRC = c
 EXTINC = h
 
 # Flags
-CFLAGS = -O0 -std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow
+CFLAGS = -O0 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow
 LDFLAGS = -lcrypt -lm
 
 # Directories

@@ -7,7 +7,7 @@
  * @author Tales L. Oliveira (github.com/TalesLimaOliveira)
  */
 
-#include "exemplos_exec.h"
+#include <exemplos_exec.h>
 
 int exec_example(void){
     // Comando para listar arquivos (ls -l)

@@ -8,8 +8,8 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include "pai.h"
-#include "filho.h"
+#include <pai.h>
+#include <filho.h>
 
 
 /**

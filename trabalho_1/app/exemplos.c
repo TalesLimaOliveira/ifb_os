@@ -8,10 +8,10 @@
  */
 
 #include <stdio.h>
-#include "fork.h"
-#include "ids.h"
-#include "wait.h"
-#include "exec.h"
+#include <fork.h>
+#include <ids.h>
+#include <wait.h>
+#include <exec.h>
 
 int main(void){
     printf("\n========== Executando exemplos_ids  ==========\n");

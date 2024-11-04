@@ -6,7 +6,7 @@
  */
 
 
-#include "pai.h"
+#include <pai.h>
 
 
 void executar_pai(void){
