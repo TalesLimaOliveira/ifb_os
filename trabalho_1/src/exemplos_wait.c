@@ -19,8 +19,8 @@ int wait_example(void){
     
     //Processo Filho
     if (pid == 0) {
-        sleep(2); // Simula Trabalho
-        return 0; // Fim do Filho
+        sleep(1); // Simula Trabalho
+        exit(0); // Fim do Filho
     }
     
     //Processo Pai

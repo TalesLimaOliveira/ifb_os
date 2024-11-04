@@ -19,16 +19,14 @@ int fork_example(void){
     
     //Processo Filho
     if (pid == 0){
-        printf("Filho com PID: %d e ", getpid());
-        printf("Pai com PID: %d\n", getppid());
-        exit(0);
+        printf("PROCESSO FILHO com PID: %d", getpid());
+        printf(" e Pai   com PID: %d\n", getppid());
+        exit(0); //Termina o filho para nao haver duplicatas
     }
 
     //Processo Pai
-    else{
-        printf("Pai com PID: %d ", getpid());
-        printf("e Filho com PID: %d\n", pid);
-    }
+    printf("PROCESSO PAI   com PID: %d", getpid());
+    printf(" e Filho com PID: %d\n", pid);
 
     return 0;
 }
