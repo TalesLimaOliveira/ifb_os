@@ -1,5 +1,5 @@
 # Vars
-APP ?= main
+APPS = main exemplo
 ARGS ?= 
 CC = gcc
 EXTSRC = c
@@ -30,17 +30,11 @@ LIBRARIES := $(wildcard $(LIBDIR)/*.a)
 
 # Executes make
 .PHONY: all
-all: folder exe
+all: folder $(APPS)
 
 # Create directory
-.PHONY: folder
 folder:
 	@ mkdir -p $(BUILDDIR) $(BINDIR) $(OBJDIR)
-
-# Compile exe
-exe:  $(OBJECTS)
-	@ $(CC) $(CFLAGS) $(OBJECTS) -I $(INCDIR) -L $(LIBDIR) $(LIBRARIES) -o $(BINDIR)/$(APP)
-	@ echo "Compiled $(APP)"
 
 # Compile objects
 $(OBJDIR)/%.o: $(SRCDIR)/%.$(EXTSRC)
@@ -49,13 +43,18 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.$(EXTSRC)
 $(OBJDIR)/%.o: $(APPDIR)/%.$(EXTSRC)
 	@ $(CC) $(CFLAGS) -c $< -I $(INCDIR) -o $@
 
-# Run the application with arguments
-.PHONY: run
-run: $(BINDIR)/$(APP)
-	@ $(BINDIR)/$(APP) $(ARGS)
+# Link object files to create the executables
+$(APPS): %: folder $(OBJECTS) $(OBJDIR)/%.o
+    $(CC) $(OBJECTS) $(OBJDIR)/$@.o $(LDFLAGS) -o $(BINDIR)/$@
+	@ echo "App Compiled"
 
+# Run targets with arguments
+run-main: main
+    ./$(BINDIR)/main $(ARGS)
+
+run-exemplo: exemplo
+    ./$(BINDIR)/exemplo $(ARGS)
 # Clean build files
-.PHONY: clean
 clean:
 	@ rm -rf $(BUILDDIR)
 	@ echo "Cleaned build files"
