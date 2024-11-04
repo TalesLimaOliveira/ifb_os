@@ -21,6 +21,7 @@ int fork_example(void){
     if (pid == 0){
         printf("Filho com PID: %d e ", getpid());
         printf("Pai com PID: %d\n", getppid());
+        exit(0);
     }
 
     //Processo Pai
