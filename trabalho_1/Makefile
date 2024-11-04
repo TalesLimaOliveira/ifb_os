@@ -1,13 +1,13 @@
-# App name (default to 'main' if not specified)
-APP ?= main
-
 # Vars
+APP ?= main
+ARGS ?= 
 CC = gcc
 EXTSRC = c
 EXTINC = h
 
 # Flags
 CFLAGS = -O0 -Wall
+#LDFLAGS = -lcrypt -lm
 
 # Directories
 APPDIR = app
@@ -18,40 +18,40 @@ BUILDDIR = build
 BINDIR = $(BUILDDIR)/bin
 OBJDIR = $(BUILDDIR)/obj
 
-# Find all source files in SRCDIR
-SOURCES := $(wildcard $(SRCDIR)/*.$(EXTSRC))
+# Find all source files (.$(EXTSRC))
+SOURCES := $(wildcard $(SRCDIR)/*.$(EXTSRC)) $(wildcard $(APPDIR)/$(APP).$(EXTSRC))
+
+# Generate a list of object files (.o) from the source file names
+OBJECTS := $(patsubst $(SRCDIR)/%.$(EXTSRC), $(OBJDIR)/%.o, $(filter $(SRCDIR)/%.$(EXTSRC), $(SOURCES))) \
+           $(patsubst $(APPDIR)/%.$(EXTSRC), $(OBJDIR)/%.o, $(filter $(APPDIR)/%.$(EXTSRC), $(SOURCES)))
 
 # Find all library files (.a) in the library directory
 LIBRARIES := $(wildcard $(LIBDIR)/*.a)
 
-# Object files
-OBJECTS := $(patsubst $(SRCDIR)/%.$(EXTSRC), $(OBJDIR)/%.o, $(SOURCES))
-
 # Executes make
 .PHONY: all
-all: clean folder $(APP)
+all: clean folder exe
 
 # Create directory
 .PHONY: folder
 folder:
 	@ mkdir -p $(BUILDDIR) $(BINDIR) $(OBJDIR)
 
-# Compile the specified application
-$(APP): $(OBJDIR)/$(APP).o $(OBJECTS)
-	@ $(CC) $(CFLAGS) $(OBJDIR)/$(APP).o $(OBJECTS) -I $(INCDIR) -L $(LIBDIR) $(LIBRARIES) $(LDFLAGS) -o $(BINDIR)/$(APP)
+# Compile exe
+exe:  $(OBJECTS)
+	$(CC) $(CFLAGS) $(OBJECTS) -I $(INCDIR) -L $(LIBDIR) $(LIBRARIES) -o $(BINDIR)/$(APP)
 
-# Compile individual object file for the application in APPDIR
-$(OBJDIR)/$(APP).o: $(APPDIR)/$(APP).$(EXTSRC)
-	@ $(CC) $(CFLAGS) -c $< -I $(INCDIR) -o $@
-
-# Compile common source files in SRCDIR
+# Compile objects
 $(OBJDIR)/%.o: $(SRCDIR)/%.$(EXTSRC)
-	@ $(CC) $(CFLAGS) -c $< -I $(INCDIR) -o $@
+	$(CC) $(CFLAGS) -c $< -I $(INCDIR) -o $@
+
+$(OBJDIR)/%.o: $(APPDIR)/%.$(EXTSRC)
+	$(CC) $(CFLAGS) -c $< -I $(INCDIR) -o $@
 
 # Run the application with arguments
 .PHONY: run
 run: $(BINDIR)/$(APP)
-	@ $(BINDIR)/$(APP)
+	@ $(BINDIR)/$(APP) $(ARGS)
 
 # Clean build files
 .PHONY: clean
