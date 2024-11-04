@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <stdlib.h>
 #include <sys/wait.h>
 
 int fork_example(void);

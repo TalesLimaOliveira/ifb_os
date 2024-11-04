@@ -1,5 +1,5 @@
 # Vars
-APPS = main exemplo
+APPS = main exemplos
 ARGS ?= 
 CC = gcc
 EXTSRC = c
@@ -49,11 +49,8 @@ $(APPS): %: folder $(OBJECTS) $(OBJDIR)/%.o
 	@ echo "App Compiled"
 
 # Run targets with arguments
-run-main: main
-	./$(BINDIR)/main $(ARGS)
-
-run-exemplo: exemplo
-	./$(BINDIR)/exemplo $(ARGS)
+run-%: %
+    ./$(BINDIR)/$* $(ARGS)
 
 # Clean build files
 clean:
