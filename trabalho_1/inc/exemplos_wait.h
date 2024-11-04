@@ -16,5 +16,6 @@
 #include <sys/wait.h>
 
 int wait_example(void);
+int waitpid_example(void);
 
 #endif//EXEMPLOS_WAIT_H

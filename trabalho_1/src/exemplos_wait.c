@@ -19,7 +19,7 @@ int wait_example(void){
     
     //Processo Filho
     if (pid == 0) {
-        printf("Filho Trabalhando...\n");
+        printf("Filho 1 Trabalhando...\n");
         sleep(2); // Simula Trabalho
         exit(0); // Termina o filho para nao haver duplicatas
     }
@@ -30,4 +30,40 @@ int wait_example(void){
     printf("Filho com PID %d terminou.\n", waited_pid);
     
     return 0;
+}
+
+
+
+int waitpid_example(void){
+    pid_t pid = fork();
+
+    if (pid < 0){
+        printf("Fork falhou");
+        return 1;
+    }
+    
+    //Processo Filho
+    if (pid == 0) {
+        printf("Filho 2 Trabalhando...\n");
+        sleep(2); // Simula Trabalho
+        exit(0); // Termina o filho para nao haver duplicatas
+    }
+    
+    // Processo Pai
+    int status;
+    // Espera pelo processo filho específico
+    pid_t waited_pid = waitpid(pid, &status, 0);
+
+    if (waited_pid > 0) {
+        if (WIFEXITED(status)) {
+            printf("Filho 2 com PID %d terminou com status %d.\n", waited_pid, WEXITSTATUS(status));
+            return 0;
+        }
+
+        printf("Filho 2 com PID %d não terminou normalmente.\n", waited_pid);
+        return 1;
+    }
+
+    printf("Erro ao esperar pelo filho 2.\n");
+    return 1;
 }
