@@ -13,17 +13,17 @@ Um manual explicando as funçoes pode ser visto juntamente com o projeto.
 
 Este projeto usa um `Makefile` para simplificar a compilação e execução. 
 
-- Para compilar o programa, utilize:
+- Para compilar os programas `main.c` e `exemplos.c`, utilize:
 ```bash
   make all
 ```
 
 - Para executar o programa principal, utilize:
 ```bash
-  make run
+  make run-main
 ```
 
 - Para executar apenas os programas exemplos, utilize:
 ```bash
-  make examples
+  make run-exemplos
 ```
