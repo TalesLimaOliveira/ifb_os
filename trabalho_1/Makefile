@@ -45,15 +45,16 @@ $(OBJDIR)/%.o: $(APPDIR)/%.$(EXTSRC)
 
 # Link object files to create the executables
 $(APPS): %: folder $(OBJECTS) $(OBJDIR)/%.o
-    $(CC) $(OBJECTS) $(OBJDIR)/$@.o $(LDFLAGS) -o $(BINDIR)/$@
+	$(CC) $(OBJECTS) $(OBJDIR)/$@.o $(LDFLAGS) -o $(BINDIR)/$@
 	@ echo "App Compiled"
 
 # Run targets with arguments
 run-main: main
-    ./$(BINDIR)/main $(ARGS)
+	./$(BINDIR)/main $(ARGS)
 
 run-exemplo: exemplo
-    ./$(BINDIR)/exemplo $(ARGS)
+	./$(BINDIR)/exemplo $(ARGS)
+
 # Clean build files
 clean:
 	@ rm -rf $(BUILDDIR)
