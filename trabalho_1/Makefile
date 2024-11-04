@@ -30,7 +30,7 @@ LIBRARIES := $(wildcard $(LIBDIR)/*.a)
 
 # Executes make
 .PHONY: all
-all: clean folder exe
+all: folder exe
 
 # Create directory
 .PHONY: folder

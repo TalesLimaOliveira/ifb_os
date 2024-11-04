@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "pai.h": "c",
-        "filho.h": "c"
+        "filho.h": "c",
+        "exemplos_fork.h": "c"
     }
 }
