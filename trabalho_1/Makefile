@@ -39,14 +39,15 @@ folder:
 
 # Compile exe
 exe:  $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) -I $(INCDIR) -L $(LIBDIR) $(LIBRARIES) -o $(BINDIR)/$(APP)
+	@ $(CC) $(CFLAGS) $(OBJECTS) -I $(INCDIR) -L $(LIBDIR) $(LIBRARIES) -o $(BINDIR)/$(APP)
+	@ echo "Compiled $(APP)"
 
 # Compile objects
 $(OBJDIR)/%.o: $(SRCDIR)/%.$(EXTSRC)
-	$(CC) $(CFLAGS) -c $< -I $(INCDIR) -o $@
+	@ $(CC) $(CFLAGS) -c $< -I $(INCDIR) -o $@
 
 $(OBJDIR)/%.o: $(APPDIR)/%.$(EXTSRC)
-	$(CC) $(CFLAGS) -c $< -I $(INCDIR) -o $@
+	@ $(CC) $(CFLAGS) -c $< -I $(INCDIR) -o $@
 
 # Run the application with arguments
 .PHONY: run
@@ -57,3 +58,4 @@ run: $(BINDIR)/$(APP)
 .PHONY: clean
 clean:
 	@ rm -rf $(BUILDDIR)
+	@ echo "Cleaned build files"
