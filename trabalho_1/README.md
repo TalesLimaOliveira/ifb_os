@@ -4,10 +4,13 @@ Este projeto em C cria um programa que demonstra a criação e controle de proce
 
 > `getpid()`, `getppid()`, `fork()`, `execv()`, `execve()`, `wait()`, e `waitpid()`.
 
+<br><br>
+
 ## Um `manual.pdf` explicando as funções pode ser visto juntamente com o projeto.
 
 ### Feito Por: [David Caldas](https://github.com/caldasdv), [Tales L. Oliveira](https://github.com/TalesLimaOliveira).
 
+<br>
 
 ### Compilar e Executar
 
