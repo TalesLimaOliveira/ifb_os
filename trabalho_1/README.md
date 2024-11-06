@@ -1,13 +1,16 @@
-# Programa de Processos
+# Programas de processos em C
 
 Este projeto em C cria um programa que demonstra a criação e controle de processos usando as funções:
 
 > `getpid()`, `getppid()`, `fork()`, `execv()`, `execve()`, `wait()`, e `waitpid()`.
 
-Um manual explicando as funçoes pode ser visto juntamente com o projeto.
+<br>
 
-### Feito Por: [David Caldas](https://github.com/caldasdv), [Tales L. Oliveira](https://github.com/TalesLimaOliveira).
+### Um [manual.pdf](./Manual.pdf) explicando as funções pode ser visto juntamente com o projeto.
 
+## Feito Por: [David Caldas](https://github.com/caldasdv), [Tales L. Oliveira](https://github.com/TalesLimaOliveira).
+
+<br>
 
 ### Compilar e Executar
 
