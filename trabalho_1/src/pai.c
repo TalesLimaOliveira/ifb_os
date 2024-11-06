@@ -8,16 +8,18 @@
 
 #include <pai.h>
 
-
+/**
+ * @brief Mostra o ID do processo pai e o de seu "avo".
+ */
 void executar_pai(void){
     printf("  PROCESSO PAI com PID: %d e \"Avo\" com PID: %d\n", getpid(), getppid());
 }
 
 
 /**
- * @brief Função que Transforma: "echo 'Olá do processo pai!'"
- *          no processo pai  utilizando execve().
- *          O processo pai espera o término do processo filho.
+ * @brief O processo pai espera o término do processo filho,
+ *           depois utilizando execve() transforma o processo 
+ *           pai em 'echo 'Olá do processo pai!'.
  */
 void transformar_pai(void){
     //Vetor para listar arquivos (ls -l)
