@@ -15,6 +15,6 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 
-int fork_example(void);
+void fork_example(void);
 
 #endif//FORK_H

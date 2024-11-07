@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 
-int wait_example(void);
-int waitpid_example(void);
+void wait_example(void);
+void waitpid_example(void);
 
 #endif//WAIT_H

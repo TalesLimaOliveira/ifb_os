@@ -9,7 +9,7 @@
 
 #include "exec.h"
 
-int exec_example(void){
+void exec_example(void){
     // Comando para listar arquivos (ls -l)
     char *args[] = {"/bin/ls", "-l", NULL};
 
@@ -19,5 +19,4 @@ int exec_example(void){
     //Em caso de sucesso o programa não executara essa linha
     //Mas em caso de erro...
     printf("execv falhou");
-    return 1;
 }

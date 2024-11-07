@@ -9,14 +9,15 @@
 
 #include "fork.h"
 
-int fork_example(void){
+void fork_example(void){
     pid_t pid = fork();
 
     if (pid < 0){
-        perror("Fork falhou");
-        return 1;
+        printf("Fork falhou\n");
+        return;
     }
     
+    //AMBOS ESTÃO SENDO PROCESSADOS EM PARALELO
     //Processo Filho
     if (pid == 0){
         printf("PROCESSO FILHO com PID: %d e Pai   com PID: %d\n", getpid(), getppid());
@@ -24,6 +25,6 @@ int fork_example(void){
     }
 
     //Processo Pai
+    sleep(1); //"Dorme" por 1s p/ garantir que o filho print primeiro ("Não é necessario, apenas por estetica visual!")
     printf("PROCESSO PAI   com PID: %d e Filho com PID: %d\n", getpid(), pid);
-    return 0;
 }

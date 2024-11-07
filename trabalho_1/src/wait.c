@@ -9,12 +9,12 @@
 
 #include "wait.h"
 
-int wait_example(void){
+void wait_example(void){
     pid_t pid = fork();
 
     if (pid < 0){
         printf("Fork falhou");
-        return 1;
+        return;
     }
     
     //Processo Filho
@@ -28,18 +28,16 @@ int wait_example(void){
     int status;
     pid_t waited_pid = wait(&status);
     printf("Filho com PID %d terminou.\n", waited_pid);
-    
-    return 0;
 }
 
 
 
-int waitpid_example(void){
+void waitpid_example(void){
     pid_t pid = fork();
 
     if (pid < 0){
         printf("Fork falhou");
-        return 1;
+        return;
     }
     
     //Processo Filho
@@ -57,13 +55,12 @@ int waitpid_example(void){
     if (waited_pid > 0) {
         if (WIFEXITED(status)) {
             printf("Filho 2 com PID %d terminou com status %d.\n", waited_pid, WEXITSTATUS(status));
-            return 0;
+            return;
         }
 
         printf("Filho 2 com PID %d não terminou normalmente.\n", waited_pid);
-        return 1;
+        return;
     }
 
     printf("Erro ao esperar pelo filho 2.\n");
-    return 1;
 }
