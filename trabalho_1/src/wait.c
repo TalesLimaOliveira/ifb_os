@@ -12,22 +12,12 @@
 void wait_example(void){
     pid_t pid = fork();
 
-    if (pid < 0){
-        printf("Fork falhou");
-        return;
-    }
-    
-    //Processo Filho
-    if (pid == 0) {
-        printf("Filho Trabalhando... PID: %d\n", getpid());
-        sleep(2); // Simula Trabalho
-        exit(0); // Termina o filho para nao haver duplicatas
-    }
-    
-    //Processo Pai
+    //Espera qualquer filho terminar...
+    //Inclusive os que ele não criou...
     int status;
     pid_t waited_pid = wait(&status);
-    printf("Filho com PID %d terminou.\n", waited_pid);
+    printf("WAIT: Filho não especifico com PID %d terminou\n", waited_pid);
+            WAITPID: Filho especifico com PID %d 
 }
 
 
@@ -54,13 +44,13 @@ void waitpid_example(void){
 
     if (waited_pid > 0) {
         if (WIFEXITED(status)) {
-            printf("Filho com PID %d terminou com status %d.\n", waited_pid, WEXITSTATUS(status));
+            printf("WAITPID:  Filho especifico com PID %d terminou com status %d.\n", waited_pid, WEXITSTATUS(status));
             return;
         }
 
-        printf("Filho com PID %d não terminou normalmente.\n", waited_pid);
+        printf("WAITPID:  Filho especifico com PID %d não terminou normalmente.\n", waited_pid);
         return;
     }
 
-    printf("Erro ao esperar pelo filho.\n");
+    printf("WAITPID: Erro ao esperar pelo filho.\n");
 }

@@ -17,7 +17,6 @@ void fork_example(void){
         return;
     }
     
-    //AMBOS ESTÃO SENDO PROCESSADOS EM PARALELO
     //Processo Filho
     if (pid == 0){
         printf("PROCESSO FILHO com PID: %d e Pai   com PID: %d\n", getpid(), getppid());
