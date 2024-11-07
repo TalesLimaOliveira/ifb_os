@@ -9,6 +9,11 @@
 
 #include "fork.h"
 
+/**
+ * @brief Exemplo da função fork(), que cria um novo processo chamado de filho.
+ *          O processo filho é uma cópia exata do processo pai. E ambos são
+ *          executatos em paralelo, ou seja, simultaneamente.
+ */
 void fork_example(void){
     pid_t pid = fork();
 

@@ -9,6 +9,11 @@
 
 #include "exec.h"
 
+/**
+ * @brief Exemplo do uso da função execv(), que substitui o processo atual
+ *          por outro processo, em caso de sucesso o programa não retorna,
+ *          pois foi substituido pelo novo processo.
+ */
 void exec_example(void){
     // Comando para listar arquivos (ls -l)
     char *args[] = {"/bin/ls", "-l", NULL};

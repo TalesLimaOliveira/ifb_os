@@ -9,16 +9,20 @@
 
 #include "wait.h"
 
+/**
+ * @brief Exemplo da função wait(), que spera qualquer filho do mesmo
+ *          grupo de processor terminar. Inclusive os que ele não criou.
+ */
 void wait_example(void){
-    //Espera qualquer filho terminar...
-    //Inclusive os que ele não criou...
     int status;
     pid_t waited_pid = wait(&status);
     printf("WAIT: Filho não especifico com PID %d terminou\n", waited_pid);
 }
 
 
-
+/**
+ * @brief Exemplo da função waitpid(), que espera por um processo filho especifico.
+ */
 void waitpid_example(void){
     pid_t pid = fork();
 
