@@ -1,6 +1,5 @@
 # Vars
 APPS = main exemplos
-ARGS ?= 
 CC = gcc
 EXTSRC = c
 EXTINC = h
@@ -50,7 +49,7 @@ $(APPS): %: folder $(OBJECTS) $(OBJDIR)/%.o
 
 # Run targets with arguments
 run-%: %
-	./$(BINDIR)/$* $(ARGS)
+	./$(BINDIR)/$*
 
 # Clean build files
 clean:
