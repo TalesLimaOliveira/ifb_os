@@ -18,7 +18,7 @@ void exec_example(void){
     // Comando para listar arquivos (ls -l)
     char *args[] = {"/bin/ls", "-l", NULL};
 
-    //Substitui o processo pelo comando 'ls -l'
+    printf("Substituindo o programa atual por: 'ls -l'\n");
     execv(args[0], args);
 
     //Em caso de sucesso o programa não executara essa linha
