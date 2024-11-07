@@ -16,9 +16,9 @@ Este projeto em C cria um programa que demonstra a criação e controle de proce
 
 Este projeto usa um `Makefile` para simplificar a compilação e execução.
 
-O Programa `exemplo.c` são os exemplos utilizados no **Manual**.pdf
+O Programa `app\exemplos.c` são os exemplos utilizados no `**Manual**.pdf`
 
-- Para **compilar** os programas `main.c` e `exemplos.c`, utilize:
+- Para **compilar** os programas `exemplos`, utilize:
 ```bash
   make all
 ```
@@ -35,18 +35,18 @@ O Programa `exemplo.c` são os exemplos utilizados no **Manual**.pdf
 
 ### Organização das pastas
 
-    /project-root
-    ├── app -> Pasta contendo o app principal
-    │    └── exemplos.c
-    ├── inc  -> Pasta contendo todos os arquivos cabeçalhos
-    │    └── *.h  
-    ├── src -> Pasta contendo todos os arquivos fontes
-    │    └── *.c
-    ├── build -> Pasta contendo todos os arquivos binarios
-    │    ├── bin
-    │    │    └── app -> Binario do app final
-    │    └── obj
-    │         └── *.o -> Binario do arquirvos objs
-    │  
-    ├── Makefile
-    └── README.md
+      /project-root
+      ├── app -> Pasta contendo o app principal
+      │    └── exemplos.c
+      ├── inc  -> Pasta contendo todos os arquivos cabeçalhos
+      │    └── *.h  
+      ├── src -> Pasta contendo todos os arquivos fontes
+      │    └── *.c
+      ├── build -> Pasta contendo todos os arquivos binarios
+      │    ├── bin
+      │    │    └── app -> Binario do app final
+      │    └── obj
+      │         └── *.o -> Binario do arquirvos objs
+      │  
+      ├── Makefile
+      └── README.md
