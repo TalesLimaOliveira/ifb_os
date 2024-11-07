@@ -1,5 +1,5 @@
 /**
- * @file exemplos_exec.c
+ * @file exec.c
  * @brief Exemplos de como utilizar as funções:
  *          execv e execve;
  * 
@@ -7,7 +7,7 @@
  * @author Tales L. Oliveira (github.com/TalesLimaOliveira)
  */
 
-#include <exemplos_exec.h>
+#include "exec.h"
 
 int exec_example(void){
     // Comando para listar arquivos (ls -l)

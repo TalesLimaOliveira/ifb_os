@@ -1,5 +1,5 @@
 /**
- * @file exemplos_fork.c
+ * @file fork.c
  * @brief Exemplos de como utilizar a função:
  *          fork();
  * 
@@ -7,7 +7,7 @@
  * @author Tales L. Oliveira (github.com/TalesLimaOliveira)
  */
 
-#include <exemplos_fork.h>
+#include "fork.h"
 
 int fork_example(void){
     pid_t pid = fork();

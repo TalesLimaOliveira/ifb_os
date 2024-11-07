@@ -1,5 +1,5 @@
 /**
- * @file exemplos_wait.c
+ * @file wait.c
  * @brief Exemplos de como utilizar as funções:
  *          wait e waitpid;
  * 
@@ -7,7 +7,7 @@
  * @author Tales L. Oliveira (github.com/TalesLimaOliveira)
  */
 
-#include <exemplos_wait.h>
+#include "wait.h"
 
 int wait_example(void){
     pid_t pid = fork();

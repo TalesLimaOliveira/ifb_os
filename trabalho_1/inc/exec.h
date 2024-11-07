@@ -1,13 +1,13 @@
 /**
- * @file exemplos_exec.h
- * @brief Header file for exemplos_exec.c
+ * @file exec.h
+ * @brief Header file for exec.c
  * 
  * @author David Caldas (github.com/caldasdv)
  * @author Tales L. Oliveira (github.com/TalesLimaOliveira)
  */
 
-#ifndef EXEMPLOS_EXEC_H
-#define EXEMPLOS_EXEC_H
+#ifndef EXEC_H
+#define EXEC_H
 
 #include <stdio.h>
 #include <unistd.h>
@@ -16,4 +16,4 @@
 
 int exec_example(void);
 
-#endif//EXEMPLOS_EXEC_H
+#endif//EXEC_H

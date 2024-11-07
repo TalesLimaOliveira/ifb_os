@@ -1,13 +1,13 @@
 /**
- * @file exemplos_fork.h
- * @brief Header file for exemplos_fork.c
+ * @file wait.h
+ * @brief Header file for wait.c
  * 
  * @author David Caldas (github.com/caldasdv)
  * @author Tales L. Oliveira (github.com/TalesLimaOliveira)
  */
 
-#ifndef EXEMPLOS_FORK_H
-#define EXEMPLOS_FORK_H
+#ifndef WAIT_H
+#define WAIT_H
 
 #include <stdio.h>
 #include <unistd.h>
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 
-int fork_example(void);
+int wait_example(void);
+int waitpid_example(void);
 
-#endif//EXEMPLOS_FORK_H
+#endif//WAIT_H
