@@ -10,14 +10,11 @@
 #include "wait.h"
 
 void wait_example(void){
-    pid_t pid = fork();
-
     //Espera qualquer filho terminar...
     //Inclusive os que ele não criou...
     int status;
     pid_t waited_pid = wait(&status);
     printf("WAIT: Filho não especifico com PID %d terminou\n", waited_pid);
-            WAITPID: Filho especifico com PID %d 
 }
 
 
