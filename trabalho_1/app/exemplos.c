@@ -22,6 +22,7 @@ int main(void){
 
     printf("\n========== Executando exemplos_wait ==========\n");
     wait_example();
+    waitpid_example();
 
     printf("\n========== Executando exemplos_exec ==========\n");
     exec_example();

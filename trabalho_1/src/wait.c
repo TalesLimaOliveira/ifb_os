@@ -43,7 +43,7 @@ void waitpid_example(void){
     //Processo Filho
     if (pid == 0) {
         printf("Filho 2 Trabalhando...\n");
-        sleep(2); // Simula Trabalho
+        sleep(1); // Simula Trabalho
         exit(0); // Termina o filho para nao haver duplicatas
     }
     
