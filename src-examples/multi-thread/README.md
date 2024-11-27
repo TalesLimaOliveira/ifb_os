@@ -1,3 +1,13 @@
+# Multi-Threaded Web Crawler
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Language-C++-blue" alt="Language">
+  <img src="https://img.shields.io/badge/Threads-Multi--Threaded-green" alt="Threads">
+  <img src="https://img.shields.io/badge/Status-Active-success" alt="Status">
+</p>
+
+
+
 ## 👨‍💻 Authors
 
 ### Original Project:
@@ -8,14 +18,6 @@
 - [Tales Oliveira](https://github.com/TalesLimaOliveira)
 
 ---
-
-# Multi-Threaded Web Crawler
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Language-C++-blue" alt="Language">
-  <img src="https://img.shields.io/badge/Threads-Multi--Threaded-green" alt="Threads">
-  <img src="https://img.shields.io/badge/Status-Active-success" alt="Status">
-</p>
 
 ## 📖 Overview
 A powerful **multi-threaded web crawler** designed to scrape websites efficiently, extracting URLs and PDF files. By leveraging multi-threading, the crawler processes content concurrently, providing fast and effective scraping capabilities.

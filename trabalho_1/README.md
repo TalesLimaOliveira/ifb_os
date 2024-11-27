@@ -1,52 +1,54 @@
-# Programas de processos em C
+# Programas exemplos de processos em C
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Language-C-blue" alt="Linguagem">
+  <img src="https://img.shields.io/badge/Status-Active-success" alt="Status">
+</p>
+
+## 👨‍💻 Autores
+
+- [David Caldas](https://github.com/caldasdv)
+- [Tales Oliveira](https://github.com/TalesLimaOliveira)
+
+---
+
+## 📖 Visão Geral
 Este projeto em C cria um programa que demonstra a criação e controle de processos usando as funções:
 
 > `getpid()`, `getppid()`, `fork()`, `execv()`, `execve()`, `wait()`, e `waitpid()`.
 
-<br>
+Um **[manual.pdf](./Manual.pdf)** explicando as funções pode ser visto juntamente com o projeto.
 
-### Um [manual.pdf](./Manual.pdf) explicando as funções pode ser visto juntamente com o projeto.
+---
 
-## Feito Por: [David Caldas](https://github.com/caldasdv), [Tales L. Oliveira](https://github.com/TalesLimaOliveira).
+## 📂 Estrutura do Projeto
 
-<br>
+| **Diretório/Arquivo** | **Descrição**                               |
+|-----------------------|---------------------------------------------|
+| `app/`                |                                             |
+| └── `exemplos.c`      | Ponto de entrada da aplicação.              |
+| `src/`                |                                             |
+| └── `exec.c`          | Exemplos da função execv()                  |
+| └── `fork.c`          | Exemplos da função fork()                   |
+| └── `ids.c`           | Exemplos das funções getpid() e getppid()   |
+| └── `wait.c`          | Exemplos das funções wait() e waitpid()     |
+| `inc/`                |                                             |
+| └── `*.h`             | Arquivos de cabeçalho para declarações.     |
+| `Makefile`            | Script de automação de build.               |
+| `README.md`           | Este arquivo, contendo a documentação do projeto. |
 
-### Compilação, Execução e Limpeza dos Programas
+---
 
-Este projeto usa um `Makefile` para simplificar a compilação e execução.
+## 🚀 Como Rodar
 
-O Programa `app\exemplos.c` são os exemplos utilizados no `**Manual**.pdf`
+### 🔨 Construir o Projeto
 
-- Para **compilar** os programas `exemplos`, utilize:
-```bash
-  make all
-```
+> make
 
-- Para **executar** os programas **exemplos**, utilize:
-```bash
-  make run
-```
+### ▶️ Rodar a Aplicação
 
-- Para **limpar** os arquivos binarios criados pela compilação, utilize:
-```bash
-  make clean
-```
+> make run
 
-### Organização das pastas
+### 🧹 Limpar Arquivos de Build
 
-      /project-root
-      ├── app -> Pasta contendo o app principal
-      │    └── exemplos.c
-      ├── inc  -> Pasta contendo todos os arquivos cabeçalhos
-      │    └── *.h  
-      ├── src -> Pasta contendo todos os arquivos fontes
-      │    └── *.c
-      ├── build -> Pasta contendo todos os arquivos binarios
-      │    ├── bin
-      │    │    └── app -> Binario do app final
-      │    └── obj
-      │         └── *.o -> Binario do arquirvos objs
-      │  
-      ├── Makefile
-      └── README.md
+> make clean
