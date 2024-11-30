@@ -19,13 +19,13 @@ void* dispatcher_function(void* arg){
     while (1){
         // Check if the directory exists
         struct stat st;
-        if (stat("resources/fileset", &st) != 0 || !S_ISDIR(st.st_mode)) {
+        if (stat("./resources/fileset", &st) != 0 || !S_ISDIR(st.st_mode)) {
             printf("ERROR: Directory does not exist or is not a directory\n");
             exit(2);
         }
 
         // Open the directory containing the files
-        DIR* dir = opendir("resources/fileset");
+        DIR* dir = opendir("./resources/fileset");
         if (!dir){
             printf("ERROR: opendir\n");
             exit(2);
@@ -34,6 +34,10 @@ void* dispatcher_function(void* arg){
         struct dirent* entry;
         // Read each entry in the directory
         while ((entry = readdir(dir)) != NULL){
+            // Skip "." and ".." entries
+            if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
+                continue;
+            }
             char filepath[MAX_FILENAME+21];
             snprintf(filepath, sizeof(filepath), "resources/fileset/%s", entry->d_name);
             if (stat(filepath, &st) == 0 && S_ISREG(st.st_mode)){
