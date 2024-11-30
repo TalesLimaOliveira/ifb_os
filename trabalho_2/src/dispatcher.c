@@ -17,6 +17,13 @@
 void* dispatcher_function(void* arg){
     (void)arg; // Supress unused variable warnings
     while (1){
+        // Check if the directory exists
+        struct stat st;
+        if (stat("resources/fileset", &st) != 0 || !S_ISDIR(st.st_mode)) {
+            printf("ERROR: Directory does not exist or is not a directory\n");
+            exit(2);
+        }
+
         // Open the directory containing the files
         DIR* dir = opendir("resources/fileset");
         if (!dir){
