@@ -1,3 +1,6 @@
+.PHONY: all clean run
+.PRECIOUS: $(OBJECTS)
+
 # Compiler selection
 CC = gcc
 EXT = c
@@ -57,6 +60,3 @@ clean:
 # Handle unknown targets
 %:
 	@:
-
-.PHONY: all clean run
-.PRECIOUS: $(OBJECTS)
