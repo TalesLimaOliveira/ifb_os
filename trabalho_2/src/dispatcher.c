@@ -20,7 +20,7 @@ void* dispatcher_function(void* arg){
         // Open the directory containing the files
         DIR* dir = opendir("resources/fileset");
         if (!dir){
-            printf("ERROR: opendir");
+            printf("ERROR: opendir\n");
             exit(2);
         }
 

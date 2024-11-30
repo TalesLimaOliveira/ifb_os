@@ -3,6 +3,7 @@
 # Compiler selection
 CC = gcc
 EXT = c
+ARGS = $(filter-out $@,$(MAKECMDGOALS))
 
 # Compilation flags
 CFLAGS ?= -Wall -Wextra -O0 
@@ -43,8 +44,8 @@ $(BIN_DIR)/%: $(APP_DIR)/%.$(EXT) $(OBJECTS) | $(BIN_DIR)
 	@echo "Compiled $(notdir $@)"
 
 # Run application: Run the specified application with arguments
-run%:
-	@$(BIN_DIR)/$* $(filter-out $@,$(MAKECMDGOALS))
+run-%:
+	@$(BIN_DIR)/$* $(ARGS)
 
 # run:
 # 	@$(BIN_DIR)/*
@@ -54,5 +55,5 @@ clean:
 	@rm -rf $(BUILD_DIR)
 	@echo "Clean complete."
 
-.PHONY: all clean run% #run
+.PHONY: all clean run-% #run
 .PRECIOUS: $(OBJECTS)
