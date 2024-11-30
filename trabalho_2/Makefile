@@ -55,5 +55,5 @@ clean:
 	@rm -rf $(BUILD_DIR)
 	@echo "Clean complete."
 
-.PHONY: all clean run%
+.PHONY: all clean run
 .PRECIOUS: $(OBJECTS)
