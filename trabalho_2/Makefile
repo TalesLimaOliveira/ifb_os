@@ -5,8 +5,8 @@ CC = gcc
 EXT = c
 
 # Compilation flags
-CFLAGS ?= -Wall -Wextra -O0
-#LDFLAGS ?= -lcrypt
+CFLAGS ?= -Wall -Wextra -O0 
+LDFLAGS ?= -lpthread
 
 # Directories
 APP_DIR = app
