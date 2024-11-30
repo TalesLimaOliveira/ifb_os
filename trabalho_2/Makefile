@@ -1,9 +1,11 @@
-# Run args: make run-app arg1 arg2
-
 # Compiler selection
 CC = gcc
 EXT = c
-ARGS ?= $(filter-out $@,$(MAKECMDGOALS))
+
+# Run arguments
+# make run arg1 arg2
+ARGS := $(filter-out $@,$(MAKECMDGOALS))
+ARGS ?= arroz
 
 # Compilation flags
 CFLAGS ?= -Wall -Wextra -O0 
@@ -45,12 +47,16 @@ $(BIN_DIR)/%: $(APP_DIR)/%.$(EXT) $(OBJECTS) | $(BIN_DIR)
 
 # Run application: Run the specified application with arguments
 run:
-	-@$(BIN_DIR)/* $(ARGS)
+	@$(BIN_DIR)/* $(ARGS) || exit 0
 
 # Clean build files: Remove build directory and object files
 clean:
 	@rm -rf $(BUILD_DIR)
 	@echo "Clean complete."
+
+# Handle unknown targets
+%:
+	@:
 
 .PHONY: all clean run
 .PRECIOUS: $(OBJECTS)
