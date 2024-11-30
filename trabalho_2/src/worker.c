@@ -12,7 +12,7 @@
  * @return void* Always returns NULL.
  */
 void* worker_function(void* arg){
-    int id = (int)arg;
+    int id = (int)(intptr_t)arg;
     char filename[MAX_FILENAME];
     while (1){
         // Lock the mutex to access shared resources
