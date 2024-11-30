@@ -44,8 +44,8 @@ $(BIN_DIR)/%: $(APP_DIR)/%.$(EXT) $(OBJECTS) | $(BIN_DIR)
 	@echo "Compiled $(notdir $@)"
 
 # Run application: Run the specified application with arguments
-run %:
-	$(BIN_DIR)/$* $(ARGS)
+run%:
+	$(BIN_DIR)/main $* $(ARGS)
 
 # run:
 # 	@$(BIN_DIR)/*
@@ -55,5 +55,5 @@ clean:
 	@rm -rf $(BUILD_DIR)
 	@echo "Clean complete."
 
-.PHONY: all clean "run %" #run
+.PHONY: all clean run%
 .PRECIOUS: $(OBJECTS)
