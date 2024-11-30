@@ -5,7 +5,7 @@ EXT = c
 # Run arguments
 # make run arg1 arg2
 ARGS := $(filter-out $@,$(MAKECMDGOALS))
-ARGS ?= arroz
+ARGS ?= 
 
 # Compilation flags
 CFLAGS ?= -Wall -Wextra -O0 
@@ -47,7 +47,7 @@ $(BIN_DIR)/%: $(APP_DIR)/%.$(EXT) $(OBJECTS) | $(BIN_DIR)
 
 # Run application: Run the specified application with arguments
 run:
-	@$(BIN_DIR)/* $(ARGS) || exit 0
+	$(BIN_DIR)/* $(ARGS) || exit 0
 
 # Clean build files: Remove build directory and object files
 clean:
