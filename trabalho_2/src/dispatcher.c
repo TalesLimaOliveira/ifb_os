@@ -28,7 +28,7 @@ void* dispatcher_function(void* arg){
         struct stat st;
         // Read each entry in the directory
         while ((entry = readdir(dir)) != NULL){
-            char filepath[MAX_FILENAME];
+            char filepath[MAX_FILENAME+21];
             snprintf(filepath, sizeof(filepath), "resources/fileset/%s", entry->d_name);
             if (stat(filepath, &st) == 0 && S_ISREG(st.st_mode)){
                 // Lock the mutex to access shared resources
