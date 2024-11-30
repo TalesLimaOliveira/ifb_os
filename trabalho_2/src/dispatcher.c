@@ -32,7 +32,6 @@ void* dispatcher_function(void* arg){
         }
 
         struct dirent* entry;
-        struct stat st;
         // Read each entry in the directory
         while ((entry = readdir(dir)) != NULL){
             char filepath[MAX_FILENAME+21];
