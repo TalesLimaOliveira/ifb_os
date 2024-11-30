@@ -44,7 +44,7 @@ $(BIN_DIR)/%: $(APP_DIR)/%.$(EXT) $(OBJECTS) | $(BIN_DIR)
 	@echo "Compiled $(notdir $@)"
 
 # Run application: Run the specified application with arguments
-run%:
+run:
 	$(BIN_DIR)/* $(ARGS)
 
 # run:
