@@ -45,7 +45,7 @@ $(BIN_DIR)/%: $(APP_DIR)/%.$(EXT) $(OBJECTS) | $(BIN_DIR)
 
 # Run application: Run the specified application with arguments
 run%:
-	$(BIN_DIR)/main $* $(ARGS)
+	$(BIN_DIR)/* $(ARGS)
 
 # run:
 # 	@$(BIN_DIR)/*
