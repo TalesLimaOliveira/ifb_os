@@ -12,6 +12,7 @@
  * @return void* Always returns NULL.
  */
 void* ranking_function(void* arg){
+    (void)arg; // Supress unused variable warnings
     while (1){
         // Lock the mutex to access shared resources
         pthread_mutex_lock(&lock);

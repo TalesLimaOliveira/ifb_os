@@ -36,7 +36,7 @@ int main(int argc, char const *argv[]){
     // Initialize worker threads
     for (int i = 0; i < MAX_WORKERS; i++){
         worker_available[i] = 1;
-        pthread_create(&workers[i], NULL, worker_function, (void*)(intptr_t)i);
+        pthread_create(&workers[i], NULL, worker_function, (void*) i);
     }
 
     // Initialize dispatcher and ranking threads

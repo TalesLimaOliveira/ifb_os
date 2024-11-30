@@ -15,6 +15,7 @@
  * @return void* Always returns NULL.
  */
 void* dispatcher_function(void* arg){
+    (void)arg; // Supress unused variable warnings
     while (1){
         // Open the directory containing the files
         DIR* dir = opendir("resources/fileset");
