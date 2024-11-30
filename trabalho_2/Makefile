@@ -45,10 +45,7 @@ $(BIN_DIR)/%: $(APP_DIR)/%.$(EXT) $(OBJECTS) | $(BIN_DIR)
 
 # Run application: Run the specified application with arguments
 run:
-	$(BIN_DIR)/* $(ARGS)
-
-# run:
-# 	@$(BIN_DIR)/*
+	-@$(BIN_DIR)/* $(ARGS)
 
 # Clean build files: Remove build directory and object files
 clean:
