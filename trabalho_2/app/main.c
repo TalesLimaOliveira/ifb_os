@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <pthread.h>
+#include <stdint.h> // Add this line
 #include "worker.h"
 #include "dispatcher.h"
 #include "ranking.h"
