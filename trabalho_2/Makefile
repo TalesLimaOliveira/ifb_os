@@ -1,14 +1,10 @@
-.PHONY: all clean run
-.PRECIOUS: $(OBJECTS)
-
 # Compiler selection
 CC = gcc
 EXT = c
 
 # Run arguments
 # make run arg1 arg2
-ARGS := $(filter-out $@,$(MAKECMDGOALS))
-ARGS ?= 
+ARGS = $(filter-out $@,$(MAKECMDGOALS))
 
 # Compilation flags
 CFLAGS ?= -Wall -Wextra -O0 
@@ -60,3 +56,6 @@ clean:
 # Handle unknown targets
 %:
 	@:
+
+.PHONY: all clean run
+.PRECIOUS: $(OBJECTS)
