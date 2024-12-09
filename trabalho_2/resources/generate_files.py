@@ -1,7 +1,7 @@
 import os
 from faker import Faker
 
-fake = Faker()
+fake = Faker("en_US")
 
 NUM_FILES = 100
 NUM_WORDS = 1000
