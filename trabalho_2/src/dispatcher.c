@@ -18,23 +18,26 @@ void* dispatcher_function(void* arg){
     (void)arg; // Supress unused variable warnings
     while (1){
         // Open the directory containing the files
-        DIR* dir = opendir("resources/fileset");
-        if (!dir){
-            printf("ERROR: opendir\n");
-            exit(2);
+        DIR* dir_fileset = opendir("resources/fileset");
+        if (dir_fileset == NULL){
+            printf("ERROR: opendir\n");     
+            perror("Failed to open directory\n");
+            exit(EXIT_FAILURE);
         }
 
         struct dirent* entry;
         struct stat st;
         
         // Read each entry in the directory
-        while ((entry = readdir(dir)) != NULL){
+        while ((entry = readdir(dir_fileset)) != NULL){
             // Skip "." and ".." entries
             if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
                 continue;
             }
+
             char filepath[MAX_FILENAME+21];
             snprintf(filepath, sizeof(filepath), "resources/fileset/%s", entry->d_name);
+
             if (stat(filepath, &st) == 0 && S_ISREG(st.st_mode)){
                 // Lock the mutex to access shared resources
                 pthread_mutex_lock(&lock);
@@ -61,7 +64,7 @@ void* dispatcher_function(void* arg){
                 pthread_mutex_unlock(&lock);
             }
         }
-        closedir(dir);
+        closedir(dir_fileset);
         // Sleep for a while before checking the directory again
         sleep(5);
     }
