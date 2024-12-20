@@ -8,9 +8,6 @@
 #include "dispatcher.h"
 #include "globals.h"
 
-// Global variable to track the number of times the directory has been checked
-int directory_check_count = 0;
-
 /**
  * @brief Function executed by the dispatcher thread to assign files to worker threads.
  * 
