@@ -46,5 +46,4 @@ void update_ranking(){
     for (int i = 0; i < TOP_N && i < file_count; i++){
         printf("%s: %d\n", file_counts[i].filename, file_counts[i].count);
     }
-    sleep(5);
 }
