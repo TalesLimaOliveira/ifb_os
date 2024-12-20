@@ -57,5 +57,8 @@ clean:
 %:
 	@:
 
+files:
+	python ./resources/generate_files.py
+
 .PHONY: all clean run
 .PRECIOUS: $(OBJECTS)

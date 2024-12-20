@@ -17,6 +17,7 @@ int worker_available[MAX_WORKERS];
 pthread_t workers[MAX_WORKERS];
 pthread_t dispatcher_thread;
 pthread_t ranking_thread;
+int directory_check_count = 0;
 
 /**
  * @brief Main function to initialize and start the dispatcher, worker, and ranking threads.

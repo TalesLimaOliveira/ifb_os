@@ -38,9 +38,13 @@ void update_ranking(){
     // Sort the file counts in descending order
     qsort(file_counts, file_count, sizeof(FileCount), compare_file_counts);
 
-    // Print the search term and the top N files
-    printf("Busca pelo termo: %s\n", term);
+    // Clear the terminal
+    printf("\033[H\033[J");
+
+    // Print the search term, directory check count, and the top N files
+    printf("Busca pelo termo: %s - %d° Busca\n", term, directory_check_count);
     for (int i = 0; i < TOP_N && i < file_count; i++){
         printf("%s: %d\n", file_counts[i].filename, file_counts[i].count);
     }
+    sleep(5);
 }

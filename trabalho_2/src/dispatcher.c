@@ -8,6 +8,9 @@
 #include "dispatcher.h"
 #include "globals.h"
 
+// Global variable to track the number of times the directory has been checked
+int directory_check_count = 0;
+
 /**
  * @brief Function executed by the dispatcher thread to assign files to worker threads.
  * 
@@ -65,6 +68,10 @@ void* dispatcher_function(void* arg){
             }
         }
         closedir(dir_fileset);
+        // Increment the directory check count
+        pthread_mutex_lock(&lock);
+        directory_check_count++;
+        pthread_mutex_unlock(&lock);
         // Sleep for a while before checking the directory again
         sleep(5);
     }
