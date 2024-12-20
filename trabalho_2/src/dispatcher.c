@@ -5,8 +5,12 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <sys/inotify.h> // Add this line
 #include "dispatcher.h"
 #include "globals.h"
+
+#define EVENT_SIZE  ( sizeof (struct inotify_event) )
+#define EVENT_BUF_LEN     ( 1024 * ( EVENT_SIZE + 16 ) )
 
 /**
  * @brief Function executed by the dispatcher thread to assign files to worker threads.
@@ -16,6 +20,22 @@
  */
 void* dispatcher_function(void* arg){
     (void)arg; // Supress unused variable warnings
+    int initial_search_done = 0;
+
+    // Initialize inotify
+    int fd = inotify_init();
+    if (fd < 0) {
+        perror("inotify_init");
+        exit(EXIT_FAILURE);
+    }
+
+    // Add watch on the directory
+    int wd = inotify_add_watch(fd, "resources/fileset", IN_MODIFY | IN_CREATE | IN_DELETE);
+    if (wd == -1) {
+        printf("Couldn't add watch to resources/fileset\n");
+        exit(EXIT_FAILURE);
+    }
+
     while (1){
         // Open the directory containing the files
         DIR* dir_fileset = opendir("resources/fileset");
@@ -65,12 +85,33 @@ void* dispatcher_function(void* arg){
             }
         }
         closedir(dir_fileset);
-        // Increment the directory check count
-        pthread_mutex_lock(&lock);
-        directory_check_count++;
-        pthread_mutex_unlock(&lock);
+
+        if (!initial_search_done) {
+            // Signal that the initial search is complete
+            pthread_mutex_lock(&lock);
+            pthread_cond_signal(&search_complete_cond);
+            pthread_mutex_unlock(&lock);
+            initial_search_done = 1;
+        }
+
+        // Wait for changes in the directory
+        char buffer[EVENT_BUF_LEN];
+        int length = read(fd, buffer, EVENT_BUF_LEN);
+        if (length < 0) {
+            perror("read");
+        } else {
+            pthread_mutex_lock(&lock);
+            pthread_cond_signal(&cond);
+            pthread_mutex_unlock(&lock);
+        }
+
         // Sleep for a while before checking the directory again
         sleep(5);
     }
+
+    // Clean up inotify
+    inotify_rm_watch(fd, wd);
+    close(fd);
+
     return NULL;
 }

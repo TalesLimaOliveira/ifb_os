@@ -10,6 +10,7 @@
 
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+pthread_cond_t search_complete_cond = PTHREAD_COND_INITIALIZER;
 char term[256];
 FileCount file_counts[MAX_FILES];
 int file_count = 0;
@@ -17,7 +18,6 @@ int worker_available[MAX_WORKERS];
 pthread_t workers[MAX_WORKERS];
 pthread_t dispatcher_thread;
 pthread_t ranking_thread;
-static int directory_check_count = 0;
 
 /**
  * @brief Main function to initialize and start the dispatcher, worker, and ranking threads.

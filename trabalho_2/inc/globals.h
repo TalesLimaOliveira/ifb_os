@@ -13,10 +13,10 @@ typedef struct {
 
 extern pthread_mutex_t lock;
 extern pthread_cond_t cond;
+extern pthread_cond_t search_complete_cond;
 extern char term[256];
 extern FileCount file_counts[MAX_FILES];
 extern int file_count;
 extern int worker_available[MAX_WORKERS];
-extern int directory_check_count;
 
 #endif // GLOBALS_H

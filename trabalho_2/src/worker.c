@@ -3,6 +3,7 @@
 #include <string.h>
 #include <pthread.h>
 #include <stdint.h>
+#include <ctype.h>
 #include "worker.h"
 #include "globals.h"
 
@@ -13,42 +14,60 @@
  * @return void* Always returns NULL.
  */
 void* worker_function(void* arg){
-    int id = (int)(intptr_t)arg;
-    char filename[MAX_FILENAME];
+    int worker_id = (intptr_t)arg;
+
     while (1){
         // Lock the mutex to access shared resources
         pthread_mutex_lock(&lock);
-        // Wait until the worker is assigned a file
-        while (worker_available[id]){
-            pthread_cond_wait(&cond, &lock);
-        }
-        // Copy the filename to process
-        strcpy(filename, file_counts[file_count - 1].filename);
-        worker_available[id] = 1;
+        // Wait for a signal to start processing
+        pthread_cond_wait(&cond, &lock);
         pthread_mutex_unlock(&lock);
 
-        // Open the file for reading
-        FILE* file = fopen(filename, "r");
-        if (!file) continue;
-
-        int count = 0;
-        char buffer[1024];
-        // Read the file line by line
-        while (fgets(buffer, sizeof(buffer), file)){
-            char* ptr = buffer;
-            // Count occurrences of the term in the line
-            while ((ptr = strstr(ptr, term)) != NULL){
-                count++;
-                ptr += strlen(term);
+        // Process each file in the file_counts array
+        for (int i = 0; i < file_count; i++){
+            FILE* file = fopen(file_counts[i].filename, "r");
+            if (file == NULL){
+                perror("Failed to open file");
+                continue;
             }
-        }
-        fclose(file);
 
-        // Lock the mutex to update shared resources
-        pthread_mutex_lock(&lock);
-        file_counts[file_count - 1].count = count;
-        pthread_cond_signal(&cond);
-        pthread_mutex_unlock(&lock);
+            file_counts[i].count = 0;
+
+            char line[1024];
+            while (fgets(line, sizeof(line), file)){
+                char* ptr = line;
+                while ((ptr = strcasestr(ptr, term)) != NULL){
+                    file_counts[i].count++;
+                    ptr += strlen(term);
+                }
+            }
+            fclose(file);
+        }
+
+        // Mark the worker as available
+        worker_available[worker_id] = 1;
+    }
+    return NULL;
+}
+
+/**
+ * @brief Case-insensitive string search function.
+ * 
+ * @param haystack The string to search in.
+ * @param needle The string to search for.
+ * @return char* Pointer to the first occurrence of needle in haystack, or NULL if not found.
+ */
+char* strcasestr(const char* haystack, const char* needle){
+    if (!*needle) return (char*)haystack;
+    for (const char* p = haystack; *p; p++){
+        if (tolower((unsigned char)*p) == tolower((unsigned char)*needle)){
+            const char* h = p, *n = needle;
+            while (*h && *n && tolower((unsigned char)*h) == tolower((unsigned char)*n)){
+                h++;
+                n++;
+            }
+            if (!*n) return (char*)p;
+        }
     }
     return NULL;
 }

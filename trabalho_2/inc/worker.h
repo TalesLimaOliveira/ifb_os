@@ -9,4 +9,13 @@
  */
 void* worker_function(void* arg);
 
+/**
+ * @brief Case-insensitive string search function.
+ * 
+ * @param haystack The string to search in.
+ * @param needle The string to search for.
+ * @return char* Pointer to the first occurrence of needle in haystack, or NULL if not found.
+ */
+char* strcasestr(const char* haystack, const char* needle);
+
 #endif // WORKER_H
