@@ -24,24 +24,29 @@ void* worker_function(void* arg){
         pthread_mutex_unlock(&lock);
 
         // Process each file in the file_counts array
-        for (int i = 0; i < file_count; i++){
+        for (int i = worker_id; i < file_count; i += MAX_WORKERS){
             FILE* file = fopen(file_counts[i].filename, "r");
             if (file == NULL){
                 perror("Failed to open file");
                 continue;
             }
 
-            file_counts[i].count = 0;
+            int local_count = 0; // Local variable for counting occurrences
 
             char line[1024];
             while (fgets(line, sizeof(line), file)){
                 char* ptr = line;
                 while ((ptr = strcasestr(ptr, term)) != NULL){
-                    file_counts[i].count++;
+                    local_count++;
                     ptr += strlen(term);
                 }
             }
             fclose(file);
+
+            // Update the global count
+            pthread_mutex_lock(&lock);
+            file_counts[i].count = local_count;
+            pthread_mutex_unlock(&lock);
         }
 
         // Mark the worker as available
