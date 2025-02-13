@@ -9,8 +9,8 @@
 #include "dispatcher.h"
 #include "globals.h"
 
-#define EVENT_SIZE(sizeof (struct inotify_event))
-#define EVENT_BUF_LEN(1024 * (EVENT_SIZE + 16))
+#define EVENT_SIZE (sizeof (struct inotify_event))
+#define EVENT_BUF_LEN (1024 * (EVENT_SIZE + 16))
 
 /**
  * @brief Function executed by the dispatcher thread to assign files to worker threads.
@@ -25,7 +25,7 @@ void* dispatcher_function(void* arg){
     // Initialize inotify
     int fd = inotify_init();
     if (fd < 0) {
-        printf("ERROR: Inizilizar inotify\n");
+        printf("ERROR: Inizilizar inoti\n");
         exit(EXIT_FAILURE);
     }
 
