@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <pthread.h>
+#include <sys/stat.h>
 #include "ranking.h"
 #include "globals.h"
 
@@ -62,6 +63,11 @@ void update_ranking(){
     // Print the search term and the top N files
     printf("Busca pelo termo: %s\n", term);
     for (int i = 0; i < TOP_N && i < file_count; i++){
+        // Check if the file still exists
+        struct stat st;
+        if (stat(file_counts[i].filename, &st) != 0) {
+            continue;
+        }
         printf("%s: %d\n", file_counts[i].filename, file_counts[i].count);
     }
 }

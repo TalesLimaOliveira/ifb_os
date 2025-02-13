@@ -4,6 +4,7 @@
 #include <pthread.h>
 #include <stdint.h>
 #include <ctype.h>
+#include <sys/stat.h>
 #include "worker.h"
 #include "globals.h"
 
@@ -30,6 +31,12 @@ void* worker_function(void* arg){
 
         // Process each file in the file_counts array
         for (int i = worker_id; i < file_count; i += MAX_WORKERS){
+            // Check if the file still exists
+            struct stat st;
+            if (stat(file_counts[i].filename, &st) != 0) {
+                continue;
+            }
+
             FILE* file = fopen(file_counts[i].filename, "r");
             if (file == NULL){
                 printf("ERROR: Falha ao abrir o Arquivo\n");

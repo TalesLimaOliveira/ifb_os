@@ -76,13 +76,16 @@ void* dispatcher_function(void* arg){
                 }
                 // If the file is new, add it to the list and assign it to a worker
                 if (!found){
-                    strcpy(file_counts[file_count].filename, filepath);
-                    file_count++;
-                    for (int i = 0; i < MAX_WORKERS; i++){
-                        if (worker_available[i]){
-                            worker_available[i] = 0;
-                            pthread_cond_signal(&cond);
-                            break;
+                    // Check if the file still exists before adding it to the list
+                    if (access(filepath, F_OK) != -1) {
+                        strcpy(file_counts[file_count].filename, filepath);
+                        file_count++;
+                        for (int i = 0; i < MAX_WORKERS; i++){
+                            if (worker_available[i]){
+                                worker_available[i] = 0;
+                                pthread_cond_signal(&cond);
+                                break;
+                            }
                         }
                     }
                 }
