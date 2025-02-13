@@ -19,4 +19,4 @@ extern FileCount file_counts[MAX_FILES];
 extern int file_count;
 extern int worker_available[MAX_WORKERS];
 
-#endif // GLOBALS_H
+#endif//GLOBALS_H

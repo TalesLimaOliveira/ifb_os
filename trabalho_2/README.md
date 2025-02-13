@@ -70,4 +70,4 @@ O dispatcher atribui arquivos para os workers processarem, os workers contam as 
 
 Caso precise, use o script `generate_files.py` para gerar arquivos .txt para o uso do programa.
 
-> python resources/generate_files.py
+> python generate_files.py

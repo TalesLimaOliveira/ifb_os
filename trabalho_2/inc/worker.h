@@ -18,4 +18,4 @@ void* worker_function(void* arg);
  */
 char* strcasestr(const char* haystack, const char* needle);
 
-#endif // WORKER_H
+#endif//WORKER_H

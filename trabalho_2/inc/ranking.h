@@ -19,4 +19,4 @@ int compare_file_counts(const void* a, const void* b);
  */
 void update_ranking();
 
-#endif // RANKING_H
+#endif//RANKING_H

@@ -5,12 +5,12 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <sys/inotify.h> // Add this line
+#include <sys/inotify.h>
 #include "dispatcher.h"
 #include "globals.h"
 
-#define EVENT_SIZE  ( sizeof (struct inotify_event) )
-#define EVENT_BUF_LEN     ( 1024 * ( EVENT_SIZE + 16 ) )
+#define EVENT_SIZE(sizeof (struct inotify_event))
+#define EVENT_BUF_LEN(1024 * (EVENT_SIZE + 16))
 
 /**
  * @brief Function executed by the dispatcher thread to assign files to worker threads.
@@ -25,14 +25,14 @@ void* dispatcher_function(void* arg){
     // Initialize inotify
     int fd = inotify_init();
     if (fd < 0) {
-        perror("inotify_init");
+        printf("ERROR: Inizilizar inotify\n");
         exit(EXIT_FAILURE);
     }
 
     // Add watch on the directory
     int wd = inotify_add_watch(fd, "resources/fileset", IN_MODIFY | IN_CREATE | IN_DELETE);
     if (wd == -1) {
-        printf("Couldn't add watch to resources/fileset\n");
+        printf("ERROR: Não foi possivel adicionar um observador em 'resources/fileset'\n");
         exit(EXIT_FAILURE);
     }
 
@@ -40,8 +40,7 @@ void* dispatcher_function(void* arg){
         // Open the directory containing the files
         DIR* dir_fileset = opendir("resources/fileset");
         if (dir_fileset == NULL){
-            printf("ERROR: opendir\n");     
-            perror("Failed to open directory\n");
+            printf("ERROR: Falha ao abrir diretorio\n");
             exit(EXIT_FAILURE);
         }
 
@@ -98,7 +97,7 @@ void* dispatcher_function(void* arg){
         char buffer[EVENT_BUF_LEN];
         int length = read(fd, buffer, EVENT_BUF_LEN);
         if (length < 0) {
-            perror("read");
+            printf("ERROR: Leitura\n");
         } else {
             pthread_mutex_lock(&lock);
             pthread_cond_signal(&cond);

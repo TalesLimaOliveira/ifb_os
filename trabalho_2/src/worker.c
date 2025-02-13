@@ -27,7 +27,7 @@ void* worker_function(void* arg){
         for (int i = worker_id; i < file_count; i += MAX_WORKERS){
             FILE* file = fopen(file_counts[i].filename, "r");
             if (file == NULL){
-                perror("Failed to open file");
+                printf("ERROR: Falha ao abrir o Arquivo\n");
                 continue;
             }
 
