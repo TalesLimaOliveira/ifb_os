@@ -37,6 +37,12 @@ void* dispatcher_function(void* arg){
     }
 
     while (1){
+        // Verify if the term is empty
+        if (strlen(term) == 0) {
+            sleep(5);
+            continue;
+        }
+
         // Open the directory containing the files
         DIR* dir_fileset = opendir("resources/fileset");
         if (dir_fileset == NULL){
@@ -92,6 +98,9 @@ void* dispatcher_function(void* arg){
             pthread_mutex_unlock(&lock);
             initial_search_done = 1;
         }
+
+        // Notify workers to start processing
+        pthread_cond_broadcast(&cond);
 
         // Wait for changes in the directory
         char buffer[EVENT_BUF_LEN];

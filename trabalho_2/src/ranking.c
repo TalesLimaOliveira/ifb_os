@@ -19,7 +19,24 @@ void* ranking_function(void* arg){
         pthread_mutex_lock(&lock);
         // Wait for a signal to update the ranking
         pthread_cond_wait(&cond, &lock);
-        update_ranking();
+        // Verify if the term is empty
+        if (strlen(term) == 0) {
+            pthread_mutex_unlock(&lock);
+            continue;
+        }
+
+        // Check if all workers are available
+        int all_workers_available = 1;
+        for (int i = 0; i < MAX_WORKERS; i++) {
+            if (!worker_available[i]) {
+                all_workers_available = 0;
+                break;
+            }
+        }
+
+        if (all_workers_available) {
+            update_ranking();
+        }
         pthread_mutex_unlock(&lock);
     }
     return NULL;

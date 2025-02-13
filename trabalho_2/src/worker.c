@@ -23,6 +23,11 @@ void* worker_function(void* arg){
         pthread_cond_wait(&cond, &lock);
         pthread_mutex_unlock(&lock);
 
+        // Verify if the term is empty
+        if (strlen(term) == 0) {
+            continue;
+        }
+
         // Process each file in the file_counts array
         for (int i = worker_id; i < file_count; i += MAX_WORKERS){
             FILE* file = fopen(file_counts[i].filename, "r");
@@ -51,6 +56,9 @@ void* worker_function(void* arg){
 
         // Mark the worker as available
         worker_available[worker_id] = 1;
+
+        // Notify the ranking thread
+        pthread_cond_signal(&cond);
     }
     return NULL;
 }
